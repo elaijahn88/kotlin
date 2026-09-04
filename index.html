@@ -1,1 +1,251 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern UI Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #e0e7ff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card .label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .stat-card .badge {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        th {
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">Acme Analytics</div>
+        <button class="btn-primary">+ New Project</button>
+    </header>
+
+    <main>
+        <section class="stats-grid">
+            <div class="card stat-card">
+                <span class="label">Total Revenue</span>
+                <div class="value">$45,231.89</div>
+                <span class="badge">+20.1% from last month</span>
+            </div>
+            <div class="card stat-card">
+                <span class="label">Active Subscriptions</span>
+                <div class="value">+2,350</div>
+                <span class="badge">+180.1% from last month</span>
+            </div>
+            <div class="card stat-card">
+                <span class="label">Active Now</span>
+                <div class="value">+573</div>
+                <span class="badge">+201 since last hour</span>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Recent Transactions</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Status</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">OL</div>
+                                        <span>Olivia Martin</span>
+                                    </div>
+                                </td>
+                                <td><span style="color: #16a34a; font-weight: 500;">Approved</span></td>
+                                <td>$1,999.00</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">JL</div>
+                                        <span>Jackson Lee</span>
+                                    </div>
+                                </td>
+                                <td><span style="color: #16a34a; font-weight: 500;">Approved</span></td>
+                                <td>$39.00</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="avatar">IN</div>
+                                        <span>Isabella Nguyen</span>
+                                    </div>
+                                </td>
+                                <td><span style="color: #dc2626; font-weight: 500;">Declined</span></td>
+                                <td>$299.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">Quick Note</h3>
+                <p style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+                    This responsive layout uses modern CSS Grid, Flexbox, CSS variables, and the Inter font for a clean design system.
+                </p>
+                <button class="btn-primary" style="width: 100%;">View Reports</button>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
