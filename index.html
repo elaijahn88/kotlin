@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Engine — Enterprise Hub</title>
+    <title>Fugie Prints — Enterprise Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
             min-height: 100vh;
         }
 
-        /* Modern Vertical Sidebar Navigation */
+        /* Left Sidebar */
         aside.sidebar {
             width: var(--sidebar-width);
             background-color: var(--bg-sidebar);
@@ -143,6 +143,7 @@
             color: var(--text-main);
         }
 
+        /* Sidebar User Profile */
         .sidebar-footer {
             border-top: 1px solid var(--border);
             padding-top: 1rem;
@@ -151,16 +152,12 @@
             gap: 0.75rem;
         }
 
-        .user-avatar {
-            width: 36px;
-            height: 36px;
+        .user-avatar-img {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.85rem;
+            object-fit: cover;
+            border: 2px solid var(--primary);
         }
 
         .user-info {
@@ -176,6 +173,7 @@
 
         .user-role {
             color: var(--text-muted);
+            font-size: 0.75rem;
         }
 
         /* Main Wrapper */
@@ -186,7 +184,7 @@
             flex-direction: column;
         }
 
-        /* Top Sticky Header Header with Breadcrumbs & Global Search */
+        /* Top Sticky Header */
         header.topbar {
             position: sticky;
             top: 0;
@@ -273,6 +271,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -282,6 +281,11 @@
 
         .btn-primary:hover {
             background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
@@ -292,6 +296,44 @@
 
         .btn-secondary:hover {
             background-color: var(--border);
+        }
+
+        /* Executive Banner */
+        .executive-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(30, 41, 59, 0.8));
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .executive-profile {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .executive-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .executive-details h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .executive-details p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         /* Grid Layouts */
@@ -345,6 +387,10 @@
         @media (max-width: 1024px) {
             .workspace-grid {
                 grid-template-columns: 1fr;
+            }
+            .executive-card {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -434,12 +480,11 @@
 </head>
 <body>
 
-    <!-- Left App Sidebar -->
     <aside class="sidebar">
         <div>
             <div class="brand-logo-group">
-                <div class="brand-icon">N</div>
-                <span class="brand-name">Nexus Hub</span>
+                <div class="brand-icon">FP</div>
+                <span class="brand-name">Fugie Prints</span>
             </div>
 
             <nav class="nav-group">
@@ -453,14 +498,14 @@
                 <a href="#" class="nav-link">
                     <div class="nav-item-left">
                         <svg class="nav-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-                        <span>Engineering</span>
+                        <span>Engineering & AI</span>
                     </div>
                     <span class="nav-badge">12</span>
                 </a>
                 <a href="#" class="nav-link">
                     <div class="nav-item-left">
                         <svg class="nav-icon" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
-                        <span>Growth & Mktg</span>
+                        <span>Marketing & Design</span>
                     </div>
                 </a>
                 
@@ -481,22 +526,20 @@
         </div>
 
         <div class="sidebar-footer">
-            <div class="user-avatar">JD</div>
+            <img src="elijah (1).jpeg" alt="Nabimanya Elijah" class="user-avatar-img">
             <div class="user-info">
-                <span class="user-name">Jane Doe</span>
-                <span class="user-role">Head of Product</span>
+                <span class="user-name">Nabimanya Elijah</span>
+                <span class="user-role">CEO & Head of Product</span>
             </div>
         </div>
     </aside>
 
-    <!-- Content Workspace -->
     <div class="main-wrapper">
-        <!-- Top Navigation Bar -->
         <header class="topbar">
             <div class="breadcrumb">
-                <span>Workspace</span>
+                <span>Fugie Prints</span>
                 <span>/</span>
-                <span class="breadcrumb-active">Cross-Dept Dashboard</span>
+                <span class="breadcrumb-active">Executive Dashboard</span>
             </div>
 
             <div style="display: flex; gap: 1rem; align-items: center;">
@@ -505,12 +548,25 @@
                     <input type="text" class="search-input" placeholder="Search tasks, campaigns, commits...">
                     <span class="shortcut-hint">⌘K</span>
                 </div>
-                <button class="btn btn-primary">+ Create New</button>
+                <button class="btn btn-primary" onclick="alert('Creating a new project for Fugie Prints!')">+ Create New</button>
             </div>
         </header>
 
-        <!-- Main Body -->
         <main class="main-content">
+            <section class="executive-card">
+                <div class="executive-profile">
+                    <img src="elijah (1).jpeg" alt="Nabimanya Elijah" class="executive-avatar">
+                    <div class="executive-details">
+                        <h1>Welcome back, Nabimanya Elijah</h1>
+                        <p>CEO & Head of Product — Fugie Prints (Uganda & Beyond)</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 0.75rem;">
+                    <a href="mailto:contact@fugieprints.com" class="btn btn-secondary">Contact Executive</a>
+                    <button class="btn btn-primary" onclick="alert('Initiating product launch sequence...')">Launch Product Sprint</button>
+                </div>
+            </section>
+
             <section class="stats-grid">
                 <div class="card stat-card">
                     <span class="label">Sprint Velocity</span>
@@ -518,7 +574,7 @@
                     <span class="badge badge-indigo">42/45 Story Points</span>
                 </div>
                 <div class="card stat-card">
-                    <span class="label">API Uptime (30d)</span>
+                    <span class="label">AI Integration Uptime</span>
                     <div class="value">99.98%</div>
                     <span class="badge badge-green">0 Critical Alerts</span>
                 </div>
@@ -528,40 +584,40 @@
                     <span class="badge badge-green">-12.4% vs target</span>
                 </div>
                 <div class="card stat-card">
-                    <span class="label">Conversion Rate</span>
+                    <span class="label">Design Conversion</span>
                     <div class="value">3.82%</div>
-                    <span class="badge badge-amber">+0.4% from campaign A</span>
+                    <span class="badge badge-amber">+0.4% this month</span>
                 </div>
             </section>
 
             <section class="workspace-grid">
                 <div class="card">
                     <div class="section-header">
-                        <h2 class="section-title">Active Engineering Tasks</h2>
+                        <h2 class="section-title">Active Engineering & AI Tasks</h2>
                         <span class="badge badge-indigo">Sprint 14</span>
                     </div>
                     
                     <div class="task-list">
                         <div class="task-item">
                             <div class="task-info">
-                                <span class="task-title">ENG-402: Refactor Auth Middleware for JWT</span>
-                                <span class="task-meta">Backend • PR #182 Merged • Assigned: Alex M.</span>
+                                <span class="task-title">ENG-402: Refactor Auth Middleware for AI Solutions</span>
+                                <span class="task-meta">Backend • PR #182 Merged • Assigned: Dev Team</span>
                             </div>
                             <span class="badge badge-green">Completed</span>
                         </div>
 
                         <div class="task-item">
                             <div class="task-info">
-                                <span class="task-title">ENG-408: Optimize GraphQL Query Latency</span>
-                                <span class="task-meta">Infrastructure • In Code Review • Assigned: Sarah K.</span>
+                                <span class="task-title">ENG-408: Optimize Predictive Analytics Model</span>
+                                <span class="task-meta">AI Infrastructure • In Review • Lead: Nabimanya Elijah</span>
                             </div>
                             <span class="badge badge-amber">In Review</span>
                         </div>
 
                         <div class="task-item">
                             <div class="task-info">
-                                <span class="task-title">ENG-415: Implement Webhook Event Triggers</span>
-                                <span class="task-meta">API Integration • In Progress • Assigned: Dev Team</span>
+                                <span class="task-title">ENG-415: Deploy Webhook Triggers for Chatbots</span>
+                                <span class="task-meta">API Integration • In Progress • Assigned: Tech Team</span>
                             </div>
                             <span class="badge badge-indigo">In Progress</span>
                         </div>
@@ -580,8 +636,8 @@
 
                 <div class="card">
                     <div class="section-header">
-                        <h2 class="section-title">Active Campaigns</h2>
-                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">View All</button>
+                        <h2 class="section-title">Marketing & Print Campaigns</h2>
+                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="alert('Navigating to campaign management...')">View All</button>
                     </div>
 
                     <table>
@@ -594,27 +650,27 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Dev Tool Onboarding</strong></td>
-                                <td>Google Ads</td>
+                                <td><strong>Brand Identity Package</strong></td>
+                                <td>Social Media</td>
                                 <td><span style="color: var(--accent-green); font-weight: 600;">3.2x</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Q3 API Launch</strong></td>
-                                <td>Newsletter</td>
+                                <td><strong>AI Automation Launch</strong></td>
+                                <td>Direct Marketing</td>
                                 <td><span style="color: var(--accent-green); font-weight: 600;">2.1x</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Retargeting B2B</strong></td>
-                                <td>LinkedIn</td>
+                                <td><strong>Flyers & Print B2B</strong></td>
+                                <td>Regional Uganda</td>
                                 <td><span style="color: var(--accent-amber); font-weight: 600;">1.4x</span></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <div style="margin-top: 1.5rem; padding: 0.85rem; background: rgba(9, 13, 22, 0.5); border-radius: 8px; border: 1px solid var(--border);">
-                        <h4 style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">GTM Focus</h4>
+                        <h4 style="font-size: 0.85rem; font-weight: 600; margin-bottom: 0.25rem;">GTM Strategy</h4>
                         <p style="font-size: 0.78rem; color: var(--text-muted);">
-                            Aligning launch dates of <strong>ENG-415</strong> with the upcoming developer newsletter blast.
+                            Aligning launch dates of <strong>AI Automation Services</strong> with local marketing campaigns in Uganda and beyond.
                         </p>
                     </div>
                 </div>
