@@ -553,6 +553,28 @@
             background-color: var(--primary);
             border-radius: 3px;
         }
+
+        @media (max-width: 700px) {
+            .search-container {
+                width: 180px;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .sidebar {
+                width: 210px !important;
+            }
+
+            .main-wrapper {
+                margin-left: 210px;
+            }
+
+            form > div {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -646,7 +668,7 @@
                 </div>
                 <div style="display: flex; gap: 0.75rem; z-index: 1;">
                     <!-- Interactive Action Buttons -->
-                    <a href="mailto:contact@fugieprints.com" class="btn btn-secondary" style="background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);">Contact Product Lead</a>
+                    <a href="mailto:elajahn@gmail.com" class="btn btn-secondary" style="background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);">Contact Product Lead</a>
                     <button class="btn btn-primary" onclick="alert('Initiating product launch sequence...')">Launch Product Sprint</button>
                 </div>
             </section>
@@ -801,6 +823,43 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Contact / Email Form -->
+            <section class="card" style="margin-top: 1.25rem;">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Contact Fugie Prints</h2>
+                        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem;">
+                            Send a message directly to our email inbox.
+                        </p>
+                    </div>
+                </div>
+
+                <form action="https://formsubmit.co/elajahn@gmail.com" method="POST"
+                      style="display:grid;gap:0.9rem;">
+                    <input type="hidden" name="_subject" value="New message from Fugie Prints website">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;">
+                        <input type="text" name="name" placeholder="Your name" required
+                               style="width:100%;padding:0.75rem;background:var(--bg-body);border:1px solid var(--border);border-radius:8px;color:var(--text-main);outline:none;">
+                        <input type="email" name="email" placeholder="Your email address" required
+                               style="width:100%;padding:0.75rem;background:var(--bg-body);border:1px solid var(--border);border-radius:8px;color:var(--text-main);outline:none;">
+                    </div>
+
+                    <input type="text" name="phone" placeholder="Phone number (optional)"
+                           style="width:100%;padding:0.75rem;background:var(--bg-body);border:1px solid var(--border);border-radius:8px;color:var(--text-main);outline:none;">
+
+                    <textarea name="message" rows="5" placeholder="Write your message..." required
+                              style="width:100%;padding:0.75rem;background:var(--bg-body);border:1px solid var(--border);border-radius:8px;color:var(--text-main);outline:none;resize:vertical;"></textarea>
+
+                    <button type="submit" class="btn btn-primary" style="justify-content:center;">
+                        Send Message
+                    </button>
+                </form>
+            </section>
+
         </main>
     </div>
 
