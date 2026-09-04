@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>Fugie Prints — Enterprise Hub</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,11 +12,11 @@
 
 <style>
 :root{
-    --bg:#080b12;
-    --sidebar:#0d1421;
-    --card:#111a29;
-    --card2:#162033;
-    --border:#263449;
+    --bg:#070b12;
+    --sidebar:#0c1422;
+    --card:#111b2b;
+    --card2:#162235;
+    --border:#26364d;
     --text:#f8fafc;
     --muted:#8fa0b8;
     --primary:#6366f1;
@@ -24,9 +25,9 @@
     --amber:#f59e0b;
     --red:#ef4444;
     --cyan:#06b6d4;
-    --radius:14px;
     --sidebar-width:270px;
-    --shadow:0 15px 40px rgba(0,0,0,.3);
+    --radius:14px;
+    --shadow:0 18px 50px rgba(0,0,0,.30);
 }
 
 *{
@@ -35,22 +36,43 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:"Plus Jakarta Sans",sans-serif;
-    background:var(--bg);
+    background:
+        radial-gradient(circle at 80% 0%,rgba(99,102,241,.07),transparent 30%),
+        var(--bg);
     color:var(--text);
     min-height:100vh;
 }
 
 button,input,textarea,select{
-    font-family:inherit;
+    font:inherit;
 }
 
 button{
     cursor:pointer;
 }
 
-/* ================= SIDEBAR ================= */
+button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+img{
+    max-width:100%;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================================================
+SIDEBAR
+========================================================= */
 
 .sidebar{
     position:fixed;
@@ -58,82 +80,78 @@ button{
     top:0;
     bottom:0;
     width:var(--sidebar-width);
-    background:linear-gradient(180deg,#0d1421,#0a101b);
+    background:linear-gradient(180deg,#0d1625,#09101b);
     border-right:1px solid var(--border);
-    padding:22px 14px;
-    z-index:100;
+    padding:20px 13px;
+    z-index:1000;
     display:flex;
     flex-direction:column;
+    overflow-y:auto;
+    transition:.25s;
 }
 
 .brand{
     display:flex;
     align-items:center;
     gap:12px;
-    padding:8px 10px 25px;
+    padding:7px 10px 24px;
 }
 
 .brand-logo{
-    width:42px;
-    height:42px;
+    width:43px;
+    height:43px;
     border-radius:12px;
-    background:linear-gradient(135deg,#6366f1,#a855f7);
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     font-weight:800;
-    box-shadow:0 8px 25px rgba(99,102,241,.35);
+    background:linear-gradient(135deg,#6366f1,#a855f7);
+    box-shadow:0 10px 30px rgba(99,102,241,.3);
 }
 
 .brand h2{
-    font-size:17px;
+    font-size:16px;
 }
 
-.brand span{
+.brand small{
     color:var(--muted);
-    font-size:11px;
-    display:block;
-    margin-top:2px;
-}
-
-.nav-section{
-    margin-bottom:18px;
+    font-size:10px;
 }
 
 .nav-title{
-    color:#66758b;
+    color:#64748b;
     font-size:10px;
     font-weight:800;
     letter-spacing:1px;
     text-transform:uppercase;
-    padding:8px 12px;
+    padding:10px 12px 6px;
 }
 
 .nav-link{
     width:100%;
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:11px 12px;
-    border-radius:9px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    margin:3px 0;
-    font-size:13px;
-    transition:.2s;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    border-radius:9px;
+    padding:11px 12px;
+    margin:2px 0;
+    font-size:12px;
     text-align:left;
+    transition:.2s;
 }
 
 .nav-link:hover{
     background:rgba(255,255,255,.05);
-    color:white;
+    color:#fff;
 }
 
 .nav-link.active{
     background:linear-gradient(135deg,#6366f1,#5558e8);
-    color:white;
-    box-shadow:0 7px 20px rgba(99,102,241,.22);
+    color:#fff;
+    box-shadow:0 8px 25px rgba(99,102,241,.2);
 }
 
 .nav-left{
@@ -142,21 +160,20 @@ button{
     gap:11px;
 }
 
-.icon{
+.nav-icon{
     width:18px;
-    height:18px;
-    opacity:.9;
+    text-align:center;
 }
 
-.badge{
-    font-size:10px;
+.nav-badge{
+    font-size:9px;
+    background:var(--border);
     padding:3px 7px;
     border-radius:20px;
-    background:var(--border);
     color:white;
 }
 
-.nav-link.active .badge{
+.nav-link.active .nav-badge{
     background:rgba(255,255,255,.18);
 }
 
@@ -172,9 +189,9 @@ button{
     gap:10px;
 }
 
-.avatar{
-    width:40px;
-    height:40px;
+.profile img{
+    width:41px;
+    height:41px;
     border-radius:50%;
     object-fit:cover;
     border:2px solid var(--primary);
@@ -182,15 +199,17 @@ button{
 
 .profile strong{
     display:block;
-    font-size:12px;
+    font-size:11px;
 }
 
 .profile small{
     color:var(--muted);
-    font-size:10px;
+    font-size:9px;
 }
 
-/* ================= MAIN ================= */
+/* =========================================================
+MAIN
+========================================================= */
 
 .main{
     margin-left:var(--sidebar-width);
@@ -198,32 +217,32 @@ button{
 }
 
 .topbar{
+    height:72px;
     position:sticky;
     top:0;
-    z-index:50;
-    height:72px;
-    padding:0 30px;
+    z-index:500;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    border-bottom:1px solid var(--border);
-    background:rgba(8,11,18,.85);
+    padding:0 30px;
+    background:rgba(7,11,18,.86);
     backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
 }
 
 .breadcrumb{
     color:var(--muted);
-    font-size:13px;
+    font-size:12px;
 }
 
 .breadcrumb strong{
-    color:white;
+    color:#fff;
 }
 
 .top-actions{
     display:flex;
-    gap:10px;
     align-items:center;
+    gap:9px;
 }
 
 .search{
@@ -231,29 +250,36 @@ button{
 }
 
 .search input{
-    width:260px;
-    padding:10px 15px 10px 38px;
+    width:270px;
+    height:40px;
     background:var(--card);
     border:1px solid var(--border);
     border-radius:9px;
-    color:white;
+    padding:0 12px 0 35px;
+    color:#fff;
     outline:none;
+    font-size:11px;
+}
+
+.search input:focus{
+    border-color:var(--primary);
 }
 
 .search span{
     position:absolute;
-    left:13px;
+    left:12px;
     top:9px;
     color:var(--muted);
 }
 
 .icon-btn{
-    width:40px;
     height:40px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:white;
+    min-width:40px;
+    padding:0 11px;
     border-radius:9px;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:#fff;
 }
 
 .icon-btn:hover{
@@ -262,34 +288,53 @@ button{
 
 .primary-btn{
     border:0;
-    background:var(--primary);
     color:white;
+    background:var(--primary);
     padding:10px 15px;
     border-radius:9px;
+    font-size:11px;
     font-weight:700;
+    transition:.2s;
 }
 
 .primary-btn:hover{
     background:#4f46e5;
+    transform:translateY(-1px);
 }
+
+.secondary-btn{
+    border:1px solid var(--border);
+    color:#fff;
+    background:var(--card);
+    padding:9px 14px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.secondary-btn:hover{
+    background:var(--card2);
+}
+
+/* =========================================================
+CONTENT
+========================================================= */
 
 .content{
-    padding:30px;
-    max-width:1500px;
+    padding:28px;
+    max-width:1600px;
 }
-
-/* ================= PAGE SYSTEM ================= */
 
 .page{
     display:none;
-    animation:fade .25s ease;
+    animation:pageIn .22s ease;
 }
 
 .page.active{
     display:block;
 }
 
-@keyframes fade{
+@keyframes pageIn{
     from{
         opacity:0;
         transform:translateY(5px);
@@ -304,7 +349,7 @@ button{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .page-header h1{
@@ -313,62 +358,17 @@ button{
 
 .page-header p{
     color:var(--muted);
-    font-size:13px;
+    font-size:11px;
     margin-top:5px;
 }
 
-/* ================= HERO ================= */
-
-.hero{
-    min-height:230px;
+.card{
+    background:linear-gradient(145deg,var(--card),#0e1725);
     border:1px solid var(--border);
-    border-radius:18px;
-    padding:30px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    overflow:hidden;
-    position:relative;
-    margin-bottom:25px;
-    background:
-        linear-gradient(110deg,rgba(17,24,39,.92),rgba(30,41,59,.65)),
-        url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80")
-        center/cover;
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:var(--shadow);
 }
-
-.hero:after{
-    content:"";
-    position:absolute;
-    width:400px;
-    height:400px;
-    background:rgba(99,102,241,.15);
-    filter:blur(80px);
-    right:-150px;
-    top:-150px;
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-}
-
-.hero h1{
-    font-size:28px;
-}
-
-.hero p{
-    color:#cbd5e1;
-    margin-top:7px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:10px;
-    position:relative;
-    z-index:2;
-}
-
-/* ================= CARDS ================= */
 
 .grid{
     display:grid;
@@ -377,31 +377,23 @@ button{
 
 .stats{
     grid-template-columns:repeat(4,1fr);
-    margin-bottom:22px;
-}
-
-.card{
-    background:linear-gradient(145deg,var(--card),#0f1725);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:20px;
-    box-shadow:var(--shadow);
+    margin-bottom:20px;
 }
 
 .stat-label{
     color:var(--muted);
-    font-size:12px;
+    font-size:11px;
 }
 
 .stat-value{
-    font-size:27px;
+    font-size:25px;
     font-weight:800;
     margin-top:7px;
 }
 
 .stat-change{
+    font-size:10px;
     margin-top:7px;
-    font-size:11px;
 }
 
 .green{color:var(--green)}
@@ -410,27 +402,166 @@ button{
 .cyan{color:var(--cyan)}
 .purple{color:var(--primary2)}
 
-.workspace{
-    grid-template-columns:1.5fr 1fr;
-}
-
 .card-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:17px;
+    margin-bottom:16px;
 }
 
 .card-header h2{
-    font-size:15px;
+    font-size:14px;
 }
 
 .card-header span{
     color:var(--muted);
-    font-size:11px;
+    font-size:10px;
 }
 
-/* ================= TABLE ================= */
+/* =========================================================
+HERO
+========================================================= */
+
+.hero{
+    min-height:260px;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+    background:
+        linear-gradient(110deg,rgba(7,11,18,.94),rgba(15,23,42,.55)),
+        url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=85")
+        center/cover;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(99,102,241,.16);
+    filter:blur(90px);
+    right:-150px;
+    top:-170px;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.hero-avatar{
+    width:75px;
+    height:75px;
+    object-fit:cover;
+    border-radius:50%;
+    border:3px solid var(--primary);
+    box-shadow:0 0 30px rgba(99,102,241,.4);
+}
+
+.hero h1{
+    font-size:26px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    font-size:12px;
+    margin-top:6px;
+}
+
+.hero-buttons{
+    position:relative;
+    z-index:3;
+    display:flex;
+    gap:9px;
+}
+
+/* =========================================================
+GALLERY
+========================================================= */
+
+.gallery{
+    grid-template-columns:repeat(4,1fr);
+    margin-bottom:22px;
+}
+
+.gallery-card{
+    position:relative;
+    height:190px;
+    overflow:hidden;
+    border-radius:13px;
+    border:1px solid var(--border);
+    transition:.25s;
+}
+
+.gallery-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--primary);
+}
+
+.gallery-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.gallery-card:hover img{
+    transform:scale(1.08);
+}
+
+.gallery-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:15px;
+    background:linear-gradient(
+        to top,
+        rgba(5,8,14,.96),
+        rgba(5,8,14,.25),
+        transparent
+    );
+}
+
+.tag{
+    align-self:flex-start;
+    padding:4px 7px;
+    border-radius:5px;
+    background:var(--primary);
+    font-size:8px;
+    font-weight:800;
+    text-transform:uppercase;
+    margin-bottom:6px;
+}
+
+.gallery-title{
+    font-size:12px;
+    font-weight:700;
+}
+
+.gallery-sub{
+    color:#a8b4c7;
+    font-size:9px;
+    margin-top:3px;
+}
+
+/* =========================================================
+TABLE
+========================================================= */
 
 .table-wrap{
     overflow-x:auto;
@@ -439,20 +570,20 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    font-size:12px;
+    font-size:11px;
 }
 
 th{
-    color:var(--muted);
     text-align:left;
-    padding:11px 8px;
-    border-bottom:1px solid var(--border);
+    color:var(--muted);
     font-weight:600;
+    padding:10px 8px;
+    border-bottom:1px solid var(--border);
 }
 
 td{
-    padding:14px 8px;
-    border-bottom:1px solid rgba(51,65,85,.55);
+    padding:13px 8px;
+    border-bottom:1px solid rgba(38,54,77,.6);
 }
 
 tr:last-child td{
@@ -460,11 +591,11 @@ tr:last-child td{
 }
 
 .status{
+    display:inline-block;
     padding:4px 8px;
     border-radius:20px;
-    font-size:10px;
+    font-size:9px;
     font-weight:700;
-    display:inline-block;
 }
 
 .status.completed{
@@ -487,38 +618,73 @@ tr:last-child td{
     background:rgba(239,68,68,.12);
 }
 
-/* ================= TASKS ================= */
+/* =========================================================
+TWO COLUMN
+========================================================= */
+
+.two-col{
+    grid-template-columns:1.5fr 1fr;
+}
 
 .task{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:13px;
+    align-items:center;
+    gap:10px;
+    padding:12px;
     border:1px solid var(--border);
-    background:rgba(5,10,18,.35);
+    background:rgba(4,8,14,.35);
     border-radius:9px;
-    margin-bottom:9px;
+    margin-bottom:8px;
 }
 
 .task-title{
     font-weight:700;
-    font-size:12px;
+    font-size:11px;
 }
 
 .task-meta{
     color:var(--muted);
-    font-size:10px;
+    font-size:9px;
     margin-top:4px;
 }
 
-/* ================= PROGRESS ================= */
+.activity{
+    display:flex;
+    gap:10px;
+    padding:11px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.activity:last-child{
+    border-bottom:0;
+}
+
+.activity-dot{
+    width:8px;
+    height:8px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:var(--primary);
+    margin-top:5px;
+}
+
+.activity strong{
+    font-size:10px;
+}
+
+.activity p{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
+}
 
 .progress{
     height:7px;
     background:var(--border);
     border-radius:10px;
     overflow:hidden;
-    margin-top:8px;
+    margin-top:7px;
 }
 
 .progress div{
@@ -527,15 +693,19 @@ tr:last-child td{
     border-radius:10px;
 }
 
-/* ================= MODULE CARDS ================= */
+/* =========================================================
+MODULE CARDS
+========================================================= */
 
-.module-grid{
+.modules{
     grid-template-columns:repeat(3,1fr);
 }
 
 .module{
-    min-height:155px;
-    cursor:pointer;
+    overflow:hidden;
+    position:relative;
+    min-height:190px;
+    padding:0;
     transition:.25s;
 }
 
@@ -544,33 +714,34 @@ tr:last-child td{
     border-color:var(--primary);
 }
 
-.module-icon{
-    width:45px;
-    height:45px;
-    border-radius:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--primary-light);
-    margin-bottom:15px;
+.module-image{
+    height:105px;
+    width:100%;
+    object-fit:cover;
+}
+
+.module-body{
+    padding:14px;
 }
 
 .module h3{
-    font-size:14px;
+    font-size:13px;
 }
 
 .module p{
     color:var(--muted);
-    font-size:11px;
+    font-size:9px;
     margin-top:5px;
 }
 
-/* ================= FORM ================= */
+/* =========================================================
+FORMS
+========================================================= */
 
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
+    gap:13px;
 }
 
 .field{
@@ -584,25 +755,21 @@ tr:last-child td{
 }
 
 .field label{
-    font-size:11px;
     color:var(--muted);
+    font-size:10px;
 }
 
 .field input,
 .field textarea,
 .field select{
     width:100%;
-    padding:11px;
+    background:#080e18;
     border:1px solid var(--border);
-    background:#0a101b;
     color:white;
     border-radius:8px;
+    padding:10px;
     outline:none;
-}
-
-.field textarea{
-    min-height:120px;
-    resize:vertical;
+    font-size:11px;
 }
 
 .field input:focus,
@@ -611,48 +778,74 @@ tr:last-child td{
     border-color:var(--primary);
 }
 
-/* ================= ACTIVITY ================= */
+.field textarea{
+    min-height:100px;
+    resize:vertical;
+}
 
-.activity{
+.form-actions{
     display:flex;
-    gap:12px;
-    padding:12px 0;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:18px;
+}
+
+/* =========================================================
+SEARCH RESULTS
+========================================================= */
+
+.search-results{
+    position:absolute;
+    top:47px;
+    right:0;
+    width:320px;
+    background:#101a29;
+    border:1px solid var(--border);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    z-index:900;
+    display:none;
+    overflow:hidden;
+}
+
+.search-results.show{
+    display:block;
+}
+
+.search-result{
+    padding:11px;
     border-bottom:1px solid var(--border);
+    cursor:pointer;
 }
 
-.activity:last-child{
-    border-bottom:0;
+.search-result:hover{
+    background:var(--card2);
 }
 
-.activity-dot{
-    width:9px;
-    height:9px;
-    margin-top:5px;
-    border-radius:50%;
-    background:var(--primary);
-}
-
-.activity strong{
+.search-result strong{
     font-size:11px;
 }
 
-.activity p{
+.search-result small{
+    display:block;
     color:var(--muted);
-    font-size:10px;
+    font-size:9px;
     margin-top:3px;
 }
 
-/* ================= MODAL ================= */
+/* =========================================================
+MODAL
+========================================================= */
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.7);
+    z-index:2000;
+    background:rgba(0,0,0,.72);
     backdrop-filter:blur(8px);
     display:none;
-    align-items:center;
     justify-content:center;
-    z-index:300;
+    align-items:center;
     padding:20px;
 }
 
@@ -662,58 +855,81 @@ tr:last-child td{
 
 .modal-box{
     width:100%;
-    max-width:550px;
-    background:#101927;
+    max-width:620px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#101a29;
     border:1px solid var(--border);
     border-radius:16px;
-    padding:25px;
-    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    padding:23px;
+    box-shadow:0 30px 90px rgba(0,0,0,.55);
 }
 
 .modal-header{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     margin-bottom:20px;
+}
+
+.modal-header h2{
+    font-size:17px;
 }
 
 .close{
     background:none;
     border:0;
     color:var(--muted);
-    font-size:22px;
+    font-size:24px;
 }
 
-/* ================= MOBILE ================= */
+/* =========================================================
+EMPTY STATE
+========================================================= */
+
+.empty{
+    padding:35px;
+    text-align:center;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.empty p{
+    font-size:11px;
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
 
 .menu-toggle{
     display:none;
 }
 
-@media(max-width:1100px){
+@media(max-width:1200px){
 
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .workspace{
-        grid-template-columns:1fr;
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .module-grid{
-        grid-template-columns:repeat(2,1fr);
+    .two-col{
+        grid-template-columns:1fr;
     }
 
 }
 
-@media(max-width:750px){
-
-    :root{
-        --sidebar-width:0px;
-    }
+@media(max-width:800px){
 
     .sidebar{
         transform:translateX(-100%);
-        transition:.25s;
         width:270px;
     }
 
@@ -725,6 +941,11 @@ tr:last-child td{
         margin-left:0;
     }
 
+    .menu-toggle{
+        display:block;
+        margin-right:8px;
+    }
+
     .topbar{
         padding:0 15px;
     }
@@ -733,38 +954,38 @@ tr:last-child td{
         display:none;
     }
 
-    .menu-toggle{
-        display:block;
-        margin-right:10px;
-    }
-
     .content{
-        padding:18px;
+        padding:17px;
     }
 
     .hero{
         flex-direction:column;
         align-items:flex-start;
         gap:20px;
-        padding:22px;
     }
 
     .hero h1{
-        font-size:22px;
+        font-size:21px;
     }
 
-    .stats{
-        grid-template-columns:1fr 1fr;
+    .hero-profile{
+        align-items:flex-start;
     }
 
-    .module-grid{
+    .gallery{
         grid-template-columns:1fr;
     }
 
-    .page-header{
-        align-items:flex-start;
-        gap:15px;
-        flex-direction:column;
+    .modules{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .stats{
+        grid-template-columns:1fr;
     }
 
     .form-grid{
@@ -774,6 +995,22 @@ tr:last-child td{
     .field.full{
         grid-column:auto;
     }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .hero-avatar{
+        width:58px;
+        height:58px;
+    }
+
+    .hero-buttons{
+        width:100%;
+        flex-wrap:wrap;
+    }
 }
 </style>
 </head>
@@ -781,123 +1018,170 @@ tr:last-child td{
 <body>
 
 <!-- =========================================================
-     SIDEBAR
+SIDEBAR
 ========================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
+<div>
+
+<div class="brand">
+    <div class="brand-logo">FP</div>
+
     <div>
-
-        <div class="brand">
-            <div class="brand-logo">FP</div>
-            <div>
-                <h2>Fugie Prints</h2>
-                <span>Enterprise Hub</span>
-            </div>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-title">Workspace</div>
-
-            <button class="nav-link active" data-page="overview">
-                <div class="nav-left">▦ <span>Overview</span></div>
-            </button>
-
-            <button class="nav-link" data-page="engineering">
-                <div class="nav-left">⌘ <span>Engineering & AI</span></div>
-                <span class="badge">12</span>
-            </button>
-
-            <button class="nav-link" data-page="marketing">
-                <div class="nav-left">◈ <span>Marketing & Design</span></div>
-            </button>
-
-            <button class="nav-link" data-page="printing">
-                <div class="nav-left">▣ <span>Printing & Production</span></div>
-                <span class="badge">8</span>
-            </button>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-title">Business</div>
-
-            <button class="nav-link" data-page="clients">
-                <div class="nav-left">♙ <span>Clients</span></div>
-            </button>
-
-            <button class="nav-link" data-page="finance">
-                <div class="nav-left">◫ <span>Invoices & Finance</span></div>
-            </button>
-
-            <button class="nav-link" data-page="deployments">
-                <div class="nav-left">↗ <span>Deployments</span></div>
-            </button>
-
-            <button class="nav-link" data-page="team">
-                <div class="nav-left">♧ <span>Team</span></div>
-            </button>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-title">System</div>
-
-            <button class="nav-link" data-page="notifications">
-                <div class="nav-left">◉ <span>Notifications</span></div>
-                <span class="badge">4</span>
-            </button>
-
-            <button class="nav-link" data-page="settings">
-                <div class="nav-left">⚙ <span>Settings</span></div>
-            </button>
-        </div>
-
+        <h2>Fugie Prints</h2>
+        <small>Enterprise Hub</small>
     </div>
+</div>
 
-    <div class="sidebar-bottom">
-        <div class="profile">
-            <img src="./elijah.jpeg" class="avatar" alt="Nabimanya Elijah">
-            <div>
-                <strong>Nabimanya Elijah</strong>
-                <small>Head of Product</small>
-            </div>
-        </div>
+
+<div class="nav-title">Workspace</div>
+
+<button class="nav-link active" data-page="overview">
+    <div class="nav-left">
+        <span class="nav-icon">▦</span>
+        Overview
     </div>
+</button>
+
+<button class="nav-link" data-page="engineering">
+    <div class="nav-left">
+        <span class="nav-icon">⌘</span>
+        Engineering & AI
+    </div>
+    <span class="nav-badge">12</span>
+</button>
+
+<button class="nav-link" data-page="marketing">
+    <div class="nav-left">
+        <span class="nav-icon">◇</span>
+        Marketing & Design
+    </div>
+</button>
+
+<button class="nav-link" data-page="printing">
+    <div class="nav-left">
+        <span class="nav-icon">▣</span>
+        Printing & Production
+    </div>
+    <span class="nav-badge" id="orderBadge">0</span>
+</button>
+
+
+<div class="nav-title">Business</div>
+
+<button class="nav-link" data-page="clients">
+    <div class="nav-left">
+        <span class="nav-icon">♙</span>
+        Clients
+    </div>
+    <span class="nav-badge" id="clientBadge">0</span>
+</button>
+
+<button class="nav-link" data-page="finance">
+    <div class="nav-left">
+        <span class="nav-icon">◫</span>
+        Invoices & Finance
+    </div>
+</button>
+
+<button class="nav-link" data-page="deployments">
+    <div class="nav-left">
+        <span class="nav-icon">↗</span>
+        Deployments
+    </div>
+</button>
+
+<button class="nav-link" data-page="team">
+    <div class="nav-left">
+        <span class="nav-icon">♧</span>
+        Team
+    </div>
+</button>
+
+
+<div class="nav-title">System</div>
+
+<button class="nav-link" data-page="notifications">
+    <div class="nav-left">
+        <span class="nav-icon">●</span>
+        Notifications
+    </div>
+    <span class="nav-badge">4</span>
+</button>
+
+<button class="nav-link" data-page="settings">
+    <div class="nav-left">
+        <span class="nav-icon">⚙</span>
+        Settings
+    </div>
+</button>
+
+</div>
+
+
+<div class="sidebar-bottom">
+
+<div class="profile">
+    <img src="./elijah.jpeg" alt="Nabimanya Elijah">
+
+    <div>
+        <strong>Nabimanya Elijah</strong>
+        <small>Head of Product</small>
+    </div>
+</div>
+
+</div>
 
 </aside>
 
 
 <!-- =========================================================
-     MAIN
+MAIN
 ========================================================= -->
 
 <div class="main">
 
 <header class="topbar">
 
-    <div style="display:flex;align-items:center">
+<div style="display:flex;align-items:center">
 
-        <button class="icon-btn menu-toggle" onclick="toggleSidebar()">☰</button>
+<button class="icon-btn menu-toggle" onclick="toggleSidebar()">☰</button>
 
-        <div class="breadcrumb">
-            Fugie Prints / <strong id="breadcrumb">Overview</strong>
-        </div>
+<div class="breadcrumb">
+    Fugie Prints / <strong id="breadcrumb">Overview</strong>
+</div>
 
-    </div>
+</div>
 
-    <div class="top-actions">
 
-        <div class="search">
-            <span>⌕</span>
-            <input id="globalSearch" placeholder="Search workspace...">
-        </div>
+<div class="top-actions">
 
-        <button class="icon-btn" onclick="showPage('notifications')">🔔</button>
+<div class="search">
 
-        <button class="primary-btn" onclick="openModal()">
-            + Create New
-        </button>
+<span>⌕</span>
 
-    </div>
+<input
+    id="globalSearch"
+    type="search"
+    autocomplete="off"
+    placeholder="Search clients, orders, projects..."
+>
+
+<div class="search-results" id="searchResults"></div>
+
+</div>
+
+
+<button class="icon-btn" onclick="showPage('notifications')">
+    🔔
+</button>
+
+<button class="primary-btn" onclick="openCreateModal()">
+    + Create New
+</button>
+
+</div>
 
 </header>
 
@@ -906,989 +1190,1522 @@ tr:last-child td{
 
 
 <!-- =========================================================
-     OVERVIEW
+OVERVIEW
 ========================================================= -->
 
 <section class="page active" id="overview">
 
-    <div class="hero">
+<div class="hero">
 
-        <div class="hero-content">
-            <h1>Welcome back, Nabimanya Elijah 👋</h1>
-            <p>Head of Product — Fugie Prints Uganda & Beyond</p>
+<div class="hero-content">
 
-            <div style="margin-top:18px;display:flex;gap:10px">
-                <span class="status completed">SYSTEMS OPERATIONAL</span>
-                <span class="status progress">SPRINT 14</span>
-            </div>
-        </div>
+<div class="hero-profile">
 
-        <div class="hero-buttons">
-            <button class="primary-btn" onclick="showPage('engineering')">
-                Launch Product Sprint
-            </button>
+<img
+    src="./elijah.jpeg"
+    class="hero-avatar"
+    alt="Nabimanya Elijah"
+>
 
-            <button class="icon-btn" onclick="showPage('settings')">
-                ⚙
-            </button>
-        </div>
+<div>
 
-    </div>
+<h1>Welcome back, Nabimanya Elijah 👋</h1>
 
+<p>
+Head of Product — Fugie Prints Uganda & Beyond
+</p>
 
-    <div class="grid stats">
+<div style="margin-top:12px;display:flex;gap:7px">
+    <span class="status completed">SYSTEM OPERATIONAL</span>
+    <span class="status progress">SPRINT 14</span>
+</div>
 
-        <div class="card">
-            <div class="stat-label">Sprint Velocity</div>
-            <div class="stat-value">92.4%</div>
-            <div class="stat-change purple">42 / 45 Story Points</div>
-        </div>
+</div>
 
-        <div class="card">
-            <div class="stat-label">AI Integration Uptime</div>
-            <div class="stat-value">99.98%</div>
-            <div class="stat-change green">● 0 Critical Alerts</div>
-        </div>
+</div>
 
-        <div class="card">
-            <div class="stat-label">Monthly Revenue</div>
-            <div class="stat-value">UGX 8.42M</div>
-            <div class="stat-change green">↑ 18.7% this month</div>
-        </div>
-
-        <div class="card">
-            <div class="stat-label">Active Clients</div>
-            <div class="stat-value">126</div>
-            <div class="stat-change cyan">+14 this month</div>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="grid workspace">
+<div class="hero-buttons">
 
-        <div class="card">
+<button
+    class="secondary-btn"
+    onclick="showPage('printing')"
+>
+    View Production
+</button>
 
-            <div class="card-header">
-                <h2>Active Engineering & AI Tasks</h2>
-                <span>Sprint 14</span>
-            </div>
+<button
+    class="primary-btn"
+    onclick="openCreateModal('order')"
+>
+    New Printing Order
+</button>
 
-            <div class="task">
-                <div>
-                    <div class="task-title">ENG-402 — Authentication Middleware</div>
-                    <div class="task-meta">Backend • PR #182 • Dev Team</div>
-                </div>
-                <span class="status completed">Completed</span>
-            </div>
+</div>
 
-            <div class="task">
-                <div>
-                    <div class="task-title">ENG-408 — Predictive Analytics</div>
-                    <div class="task-meta">AI Infrastructure • Elijah</div>
-                </div>
-                <span class="status review">In Review</span>
-            </div>
-
-            <div class="task">
-                <div>
-                    <div class="task-title">ENG-415 — Chatbot Webhooks</div>
-                    <div class="task-meta">API Integration • Tech Team</div>
-                </div>
-                <span class="status progress">In Progress</span>
-            </div>
-
-            <div style="margin-top:20px">
-                <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted)">
-                    <span>Sprint Completion</span>
-                    <span>78%</span>
-                </div>
-
-                <div class="progress">
-                    <div style="width:78%"></div>
-                </div>
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="card">
+<!-- GALLERY -->
 
-            <div class="card-header">
-                <h2>Recent Activity</h2>
-                <span>Live</span>
-            </div>
+<div class="grid gallery">
 
-            <div class="activity">
-                <div class="activity-dot"></div>
-                <div>
-                    <strong>New printing order received</strong>
-                    <p>ABC Enterprises • 500 flyers</p>
-                </div>
-            </div>
+<div class="gallery-card">
 
-            <div class="activity">
-                <div class="activity-dot"></div>
-                <div>
-                    <strong>Website deployed</strong>
-                    <p>Client Portal v2.4</p>
-                </div>
-            </div>
+<img
+src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=85"
+alt="Graphic design"
+>
 
-            <div class="activity">
-                <div class="activity-dot"></div>
-                <div>
-                    <strong>Invoice payment received</strong>
-                    <p>UGX 450,000 • INV-2048</p>
-                </div>
-            </div>
+<div class="gallery-overlay">
 
-            <div class="activity">
-                <div class="activity-dot"></div>
-                <div>
-                    <strong>New client registered</strong>
-                    <p>Kamuli Business Centre</p>
-                </div>
-            </div>
+<span class="tag">Design Studio</span>
 
-        </div>
+<span class="gallery-title">
+High-Impact Print & Branding
+</span>
 
-    </div>
+<span class="gallery-sub">
+Precision graphics and branding solutions
+</span>
+
+</div>
+
+</div>
+
+
+<div class="gallery-card">
+
+<img
+src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1000&q=85"
+alt="Artificial intelligence"
+>
+
+<div class="gallery-overlay">
+
+<span class="tag">AI & ML</span>
+
+<span class="gallery-title">
+Neural Automation Hub
+</span>
+
+<span class="gallery-sub">
+AI assistants and intelligent automation
+</span>
+
+</div>
+
+</div>
+
+
+<div class="gallery-card">
+
+<img
+src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=85"
+alt="Analytics"
+>
+
+<div class="gallery-overlay">
+
+<span class="tag">Analytics</span>
+
+<span class="gallery-title">
+Business Intelligence
+</span>
+
+<span class="gallery-sub">
+Performance data and insights
+</span>
+
+</div>
+
+</div>
+
+
+<div class="gallery-card">
+
+<img
+src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=85"
+alt="Software team"
+>
+
+<div class="gallery-overlay">
+
+<span class="tag">Engineering</span>
+
+<span class="gallery-title">
+Software Engineering
+</span>
+
+<span class="gallery-sub">
+Websites, apps and enterprise systems
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD STATS -->
+
+<div class="grid stats">
+
+<div class="card">
+
+<div class="stat-label">
+Total Revenue
+</div>
+
+<div class="stat-value" id="dashRevenue">
+UGX 0
+</div>
+
+<div class="stat-change green">
+Live from local records
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat-label">
+Printing Orders
+</div>
+
+<div class="stat-value" id="dashOrders">
+0
+</div>
+
+<div class="stat-change cyan">
+All recorded orders
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat-label">
+Active Clients
+</div>
+
+<div class="stat-value" id="dashClients">
+0
+</div>
+
+<div class="stat-change purple">
+Client directory
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat-label">
+Outstanding
+</div>
+
+<div class="stat-value" id="dashOutstanding">
+UGX 0
+</div>
+
+<div class="stat-change amber">
+Unpaid invoice balance
+</div>
+
+</div>
+
+</div>
+
+
+<div class="grid two-col">
+
+
+<!-- TASKS -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>Active Engineering & AI Tasks</h2>
+
+<span>Sprint 14</span>
+
+</div>
+
+
+<div class="task">
+
+<div>
+
+<div class="task-title">
+ENG-402 — Authentication Middleware
+</div>
+
+<div class="task-meta">
+Backend • PR #182 • Dev Team
+</div>
+
+</div>
+
+<span class="status completed">
+Completed
+</span>
+
+</div>
+
+
+<div class="task">
+
+<div>
+
+<div class="task-title">
+ENG-408 — Predictive Analytics
+</div>
+
+<div class="task-meta">
+AI Infrastructure • Elijah
+</div>
+
+</div>
+
+<span class="status review">
+In Review
+</span>
+
+</div>
+
+
+<div class="task">
+
+<div>
+
+<div class="task-title">
+ENG-415 — Chatbot Webhooks
+</div>
+
+<div class="task-meta">
+API Integration • Tech Team
+</div>
+
+</div>
+
+<span class="status progress">
+In Progress
+</span>
+
+</div>
+
+
+<div style="margin-top:18px">
+
+<div style="display:flex;justify-content:space-between;color:var(--muted);font-size:9px">
+
+<span>
+Sprint Completion
+</span>
+
+<span>
+78%
+</span>
+
+</div>
+
+<div class="progress">
+<div style="width:78%"></div>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACTIVITY -->
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>Recent Activity</h2>
+
+<span>Live</span>
+
+</div>
+
+<div id="activityList">
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+<strong>System initialized</strong>
+<p>Fugie Prints Enterprise Hub is ready.</p>
+</div>
+
+</div>
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+<strong>Dashboard loaded</strong>
+<p>Local business records synchronized.</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     ENGINEERING
+ENGINEERING
 ========================================================= -->
 
 <section class="page" id="engineering">
 
-    <div class="page-header">
-        <div>
-            <h1>Engineering & AI</h1>
-            <p>Manage software, artificial intelligence and technical projects.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('New Engineering Project')">
-            + New Project
-        </button>
-    </div>
+<div>
 
+<h1>Engineering & AI</h1>
 
-    <div class="grid stats">
+<p>
+Software development, AI systems and technical projects.
+</p>
 
-        <div class="card">
-            <div class="stat-label">Active Projects</div>
-            <div class="stat-value">12</div>
-            <div class="stat-change purple">+3 this month</div>
-        </div>
+</div>
 
-        <div class="card">
-            <div class="stat-label">AI Systems</div>
-            <div class="stat-value">7</div>
-            <div class="stat-change green">All operational</div>
-        </div>
+<button
+class="primary-btn"
+onclick="openCreateModal('project')"
+>
++ New Project
+</button>
 
-        <div class="card">
-            <div class="stat-label">Open Issues</div>
-            <div class="stat-value">18</div>
-            <div class="stat-change amber">5 high priority</div>
-        </div>
-
-        <div class="card">
-            <div class="stat-label">Deployments</div>
-            <div class="stat-value">34</div>
-            <div class="stat-change cyan">This quarter</div>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="card">
+<div class="grid modules">
 
-        <div class="card-header">
-            <h2>Engineering Projects</h2>
-            <span>Updated moments ago</span>
-        </div>
+<div class="card module">
 
-        <div class="table-wrap">
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85"
+alt="Software engineering"
+>
 
-            <table>
+<div class="module-body">
 
-                <thead>
-                <tr>
-                    <th>Project</th>
-                    <th>Technology</th>
-                    <th>Lead</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+<h3>Software Engineering</h3>
 
-                <tbody>
+<p>
+Web applications, APIs and business systems.
+</p>
 
-                <tr>
-                    <td><strong>Fugie Client Portal</strong></td>
-                    <td>React / Firebase</td>
-                    <td>Elijah</td>
-                    <td>92%</td>
-                    <td><span class="status progress">In Progress</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td><strong>AI Customer Assistant</strong></td>
-                    <td>AI / API</td>
-                    <td>AI Team</td>
-                    <td>74%</td>
-                    <td><span class="status review">Testing</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td><strong>Printing Management System</strong></td>
-                    <td>Web / Database</td>
-                    <td>Dev Team</td>
-                    <td>61%</td>
-                    <td><span class="status progress">Development</span></td>
-                </tr>
 
-                <tr>
-                    <td><strong>Business Analytics Engine</strong></td>
-                    <td>Python / ML</td>
-                    <td>Data Team</td>
-                    <td>45%</td>
-                    <td><span class="status pending">Planning</span></td>
-                </tr>
+<div class="card module">
 
-                </tbody>
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=900&q=85"
+alt="Artificial intelligence"
+>
 
-            </table>
+<div class="module-body">
 
-        </div>
+<h3>Artificial Intelligence</h3>
 
-    </div>
+<p>
+AI assistants, automation and machine learning.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card module">
+
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=85"
+alt="Programming"
+>
+
+<div class="module-body">
+
+<h3>Development Lab</h3>
+
+<p>
+Build, test and manage technical projects.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:20px">
+
+<div class="card-header">
+<h2>Projects</h2>
+<span id="projectCount">0 projects</span>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Project</th>
+<th>Category</th>
+<th>Lead</th>
+<th>Progress</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="projectsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     MARKETING
+MARKETING
 ========================================================= -->
 
 <section class="page" id="marketing">
 
-    <div class="page-header">
-        <div>
-            <h1>Marketing & Design</h1>
-            <p>Campaigns, branding, social media and creative production.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('New Marketing Campaign')">
-            + New Campaign
-        </button>
-    </div>
+<div>
 
+<h1>Marketing & Design</h1>
 
-    <div class="grid module-grid">
+<p>
+Campaigns, branding, graphics and digital marketing.
+</p>
 
-        <div class="card module">
-            <div class="module-icon">🎨</div>
-            <h3>Brand Identity</h3>
-            <p>Logos, brand systems, business cards and corporate materials.</p>
-        </div>
+</div>
 
-        <div class="card module">
-            <div class="module-icon">📱</div>
-            <h3>Social Media</h3>
-            <p>Campaign planning, content production and audience growth.</p>
-        </div>
+<button
+class="primary-btn"
+onclick="openCreateModal('campaign')"
+>
++ New Campaign
+</button>
 
-        <div class="card module">
-            <div class="module-icon">📢</div>
-            <h3>Advertising</h3>
-            <p>Digital advertising and promotional campaign management.</p>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="card" style="margin-top:18px">
+<div class="grid modules">
 
-        <div class="card-header">
-            <h2>Active Campaigns</h2>
-            <span>Marching toward targets</span>
-        </div>
+<div class="card module">
 
-        <div class="table-wrap">
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&q=85"
+alt="Branding"
+>
 
-            <table>
+<div class="module-body">
 
-                <thead>
-                <tr>
-                    <th>Campaign</th>
-                    <th>Channel</th>
-                    <th>Budget</th>
-                    <th>ROI</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+<h3>Brand Identity</h3>
 
-                <tbody>
+<p>
+Logos, corporate identity and brand systems.
+</p>
 
-                <tr>
-                    <td>Brand Identity Package</td>
-                    <td>Social Media</td>
-                    <td>UGX 850K</td>
-                    <td class="green">3.2x</td>
-                    <td><span class="status progress">Active</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td>AI Automation Launch</td>
-                    <td>Direct Marketing</td>
-                    <td>UGX 1.2M</td>
-                    <td class="green">2.1x</td>
-                    <td><span class="status progress">Active</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td>Flyers & Print B2B</td>
-                    <td>Regional Uganda</td>
-                    <td>UGX 600K</td>
-                    <td class="amber">1.4x</td>
-                    <td><span class="status review">Optimizing</span></td>
-                </tr>
 
-                </tbody>
+<div class="card module">
 
-            </table>
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=85"
+alt="Graphic design"
+>
 
-        </div>
+<div class="module-body">
 
-    </div>
+<h3>Graphic Design</h3>
+
+<p>
+Posters, flyers, social media and promotional graphics.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card module">
+
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85"
+alt="Marketing analytics"
+>
+
+<div class="module-body">
+
+<h3>Campaign Analytics</h3>
+
+<p>
+Measure marketing performance and ROI.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:20px">
+
+<div class="card-header">
+<h2>Marketing Campaigns</h2>
+<span>Current campaigns</span>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>Campaign</th>
+<th>Channel</th>
+<th>Budget</th>
+<th>ROI</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><strong>Brand Identity Package</strong></td>
+<td>Social Media</td>
+<td>UGX 850K</td>
+<td class="green">3.2x</td>
+<td><span class="status progress">Active</span></td>
+</tr>
+
+<tr>
+<td><strong>AI Automation Launch</strong></td>
+<td>Direct Marketing</td>
+<td>UGX 1.2M</td>
+<td class="green">2.1x</td>
+<td><span class="status progress">Active</span></td>
+</tr>
+
+<tr>
+<td><strong>Flyers & Print B2B</strong></td>
+<td>Regional Uganda</td>
+<td>UGX 600K</td>
+<td class="amber">1.4x</td>
+<td><span class="status review">Optimizing</span></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     PRINTING
+PRINTING
 ========================================================= -->
 
 <section class="page" id="printing">
 
-    <div class="page-header">
-        <div>
-            <h1>Printing & Production</h1>
-            <p>Manage printing jobs, production and delivery.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('New Printing Order')">
-            + New Order
-        </button>
-    </div>
+<div>
 
+<h1>Printing & Production</h1>
 
-    <div class="grid stats">
+<p>
+Manage printing orders, production and customer deliveries.
+</p>
 
-        <div class="card">
-            <div class="stat-label">Today's Orders</div>
-            <div class="stat-value">18</div>
-            <div class="stat-change cyan">+5 today</div>
-        </div>
+</div>
 
-        <div class="card">
-            <div class="stat-label">In Production</div>
-            <div class="stat-value">8</div>
-            <div class="stat-change amber">Active jobs</div>
-        </div>
+<button
+class="primary-btn"
+onclick="openCreateModal('order')"
+>
++ New Printing Order
+</button>
 
-        <div class="card">
-            <div class="stat-label">Ready for Pickup</div>
-            <div class="stat-value">11</div>
-            <div class="stat-change green">Ready</div>
-        </div>
-
-        <div class="card">
-            <div class="stat-label">Monthly Print Revenue</div>
-            <div class="stat-value">UGX 4.8M</div>
-            <div class="stat-change green">↑ 14.2%</div>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="card">
+<div class="grid stats">
 
-        <div class="card-header">
-            <h2>Production Queue</h2>
-            <span>8 active jobs</span>
-        </div>
+<div class="card">
 
-        <div class="table-wrap">
+<div class="stat-label">Total Orders</div>
 
-            <table>
+<div class="stat-value" id="printTotal">
+0
+</div>
 
-                <thead>
-                <tr>
-                    <th>Order</th>
-                    <th>Client</th>
-                    <th>Service</th>
-                    <th>Quantity</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+<div class="stat-change cyan">
+All orders
+</div>
 
-                <tbody>
+</div>
 
-                <tr>
-                    <td>#FP-1028</td>
-                    <td>ABC Enterprises</td>
-                    <td>Flyers</td>
-                    <td>500</td>
-                    <td>100%</td>
-                    <td><span class="status completed">Ready</span></td>
-                </tr>
+<div class="card">
 
-                <tr>
-                    <td>#FP-1029</td>
-                    <td>Grace Church</td>
-                    <td>Booklets</td>
-                    <td>250</td>
-                    <td>70%</td>
-                    <td><span class="status progress">Printing</span></td>
-                </tr>
+<div class="stat-label">In Production</div>
 
-                <tr>
-                    <td>#FP-1030</td>
-                    <td>Kamuli Centre</td>
-                    <td>Business Cards</td>
-                    <td>1,000</td>
-                    <td>45%</td>
-                    <td><span class="status progress">Production</span></td>
-                </tr>
+<div class="stat-value" id="printProduction">
+0
+</div>
 
-                </tbody>
+<div class="stat-change amber">
+Active jobs
+</div>
 
-            </table>
+</div>
 
-        </div>
+<div class="card">
 
-    </div>
+<div class="stat-label">Completed</div>
+
+<div class="stat-value" id="printCompleted">
+0
+</div>
+
+<div class="stat-change green">
+Finished jobs
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="stat-label">Print Revenue</div>
+
+<div class="stat-value" id="printRevenue">
+UGX 0
+</div>
+
+<div class="stat-change green">
+Recorded order value
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+
+<h2>Production Queue</h2>
+
+<span id="productionCount">0 orders</span>
+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Order</th>
+<th>Client</th>
+<th>Service</th>
+<th>Qty</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="ordersTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     CLIENTS
+CLIENTS
 ========================================================= -->
 
 <section class="page" id="clients">
 
-    <div class="page-header">
-        <div>
-            <h1>Clients</h1>
-            <p>Manage customers, contacts and business relationships.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('Add New Client')">
-            + Add Client
-        </button>
-    </div>
+<div>
+
+<h1>Clients</h1>
+
+<p>
+Manage customers and business relationships.
+</p>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="openCreateModal('client')"
+>
++ Add Client
+</button>
+
+</div>
 
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-header">
-            <h2>Client Directory</h2>
-            <span>126 clients</span>
-        </div>
+<div class="card-header">
 
-        <div class="table-wrap">
+<h2>Client Directory</h2>
 
-            <table>
+<span id="clientCount">
+0 clients
+</span>
 
-                <thead>
-                <tr>
-                    <th>Client</th>
-                    <th>Contact</th>
-                    <th>Services</th>
-                    <th>Total Spent</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+</div>
 
-                <tbody>
 
-                <tr>
-                    <td><strong>ABC Enterprises</strong></td>
-                    <td>+256 700 000 001</td>
-                    <td>Printing + Branding</td>
-                    <td>UGX 3.4M</td>
-                    <td><span class="status completed">Active</span></td>
-                </tr>
+<div class="table-wrap">
 
-                <tr>
-                    <td><strong>Grace Church</strong></td>
-                    <td>+256 700 000 002</td>
-                    <td>Book Printing</td>
-                    <td>UGX 1.8M</td>
-                    <td><span class="status completed">Active</span></td>
-                </tr>
+<table>
 
-                <tr>
-                    <td><strong>Kamuli Business Centre</strong></td>
-                    <td>+256 700 000 003</td>
-                    <td>Website + Software</td>
-                    <td>UGX 5.2M</td>
-                    <td><span class="status progress">Premium</span></td>
-                </tr>
+<thead>
 
-                </tbody>
+<tr>
+<th>Client</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Company</th>
+<th>Actions</th>
+</tr>
 
-            </table>
+</thead>
 
-        </div>
+<tbody id="clientsTable"></tbody>
 
-    </div>
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     FINANCE
+FINANCE
 ========================================================= -->
 
 <section class="page" id="finance">
 
-    <div class="page-header">
-        <div>
-            <h1>Invoices & Finance</h1>
-            <p>Track invoices, payments, revenue and outstanding balances.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('Create Invoice')">
-            + Create Invoice
-        </button>
-    </div>
+<div>
 
+<h1>Invoices & Finance</h1>
 
-    <div class="grid stats">
+<p>
+Track invoices, payments and outstanding balances.
+</p>
 
-        <div class="card">
-            <div class="stat-label">Total Revenue</div>
-            <div class="stat-value">UGX 8.42M</div>
-            <div class="stat-change green">↑ 18.7%</div>
-        </div>
+</div>
 
-        <div class="card">
-            <div class="stat-label">Paid</div>
-            <div class="stat-value">UGX 6.91M</div>
-            <div class="stat-change green">82%</div>
-        </div>
+<button
+class="primary-btn"
+onclick="openCreateModal('invoice')"
+>
++ Create Invoice
+</button>
 
-        <div class="card">
-            <div class="stat-label">Outstanding</div>
-            <div class="stat-value">UGX 1.51M</div>
-            <div class="stat-change amber">18%</div>
-        </div>
-
-        <div class="card">
-            <div class="stat-label">Invoices</div>
-            <div class="stat-value">48</div>
-            <div class="stat-change cyan">This month</div>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="card">
+<div class="grid stats">
 
-        <div class="card-header">
-            <h2>Recent Invoices</h2>
-        </div>
+<div class="card">
 
-        <div class="table-wrap">
+<div class="stat-label">
+Invoice Value
+</div>
 
-            <table>
+<div class="stat-value" id="invoiceValue">
+UGX 0
+</div>
 
-                <thead>
-                <tr>
-                    <th>Invoice</th>
-                    <th>Client</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+</div>
 
-                <tbody>
 
-                <tr>
-                    <td>INV-2048</td>
-                    <td>ABC Enterprises</td>
-                    <td>UGX 450,000</td>
-                    <td>05 Sep 2026</td>
-                    <td><span class="status completed">Paid</span></td>
-                </tr>
+<div class="card">
 
-                <tr>
-                    <td>INV-2047</td>
-                    <td>Grace Church</td>
-                    <td>UGX 780,000</td>
-                    <td>04 Sep 2026</td>
-                    <td><span class="status review">Pending</span></td>
-                </tr>
+<div class="stat-label">
+Paid
+</div>
 
-                <tr>
-                    <td>INV-2046</td>
-                    <td>Kamuli Centre</td>
-                    <td>UGX 1,250,000</td>
-                    <td>03 Sep 2026</td>
-                    <td><span class="status completed">Paid</span></td>
-                </tr>
+<div class="stat-value green" id="paidValue">
+UGX 0
+</div>
 
-                </tbody>
+</div>
 
-            </table>
 
-        </div>
+<div class="card">
 
-    </div>
+<div class="stat-label">
+Outstanding
+</div>
+
+<div class="stat-value amber" id="financeOutstanding">
+UGX 0
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="stat-label">
+Invoices
+</div>
+
+<div class="stat-value" id="invoiceCount">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-header">
+<h2>Invoices</h2>
+<span>Financial records</span>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Invoice</th>
+<th>Client</th>
+<th>Amount</th>
+<th>Paid</th>
+<th>Balance</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+</thead>
+
+<tbody id="invoicesTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     DEPLOYMENTS
+DEPLOYMENTS
 ========================================================= -->
 
 <section class="page" id="deployments">
 
-    <div class="page-header">
-        <div>
-            <h1>Deployments</h1>
-            <p>Monitor websites, applications, APIs and production systems.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('New Deployment')">
-            + Deploy
-        </button>
-    </div>
+<div>
 
+<h1>Deployments</h1>
 
-    <div class="grid module-grid">
+<p>
+Websites, Android applications, APIs and production systems.
+</p>
 
-        <div class="card module">
-            <div class="module-icon">🌐</div>
-            <h3>Websites</h3>
-            <p>Production websites and client portals.</p>
-            <div class="progress"><div style="width:96%"></div></div>
-        </div>
+</div>
 
-        <div class="card module">
-            <div class="module-icon">📱</div>
-            <h3>Mobile Apps</h3>
-            <p>Android applications and mobile services.</p>
-            <div class="progress"><div style="width:82%"></div></div>
-        </div>
+<button
+class="primary-btn"
+onclick="openCreateModal('deployment')"
+>
++ New Deployment
+</button>
 
-        <div class="card module">
-            <div class="module-icon">☁</div>
-            <h3>Cloud APIs</h3>
-            <p>Backend APIs, Firebase services and integrations.</p>
-            <div class="progress"><div style="width:99%"></div></div>
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="card" style="margin-top:18px">
+<div class="grid modules">
 
-        <div class="card-header">
-            <h2>Production Systems</h2>
-        </div>
+<div class="card module">
 
-        <div class="table-wrap">
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85"
+alt="Cloud infrastructure"
+>
 
-            <table>
+<div class="module-body">
 
-                <thead>
-                <tr>
-                    <th>Application</th>
-                    <th>Environment</th>
-                    <th>Version</th>
-                    <th>Uptime</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+<h3>Cloud Systems</h3>
 
-                <tbody>
+<p>
+Monitor hosted applications and APIs.
+</p>
 
-                <tr>
-                    <td>Fugie Client Portal</td>
-                    <td>Production</td>
-                    <td>v2.4.1</td>
-                    <td>99.99%</td>
-                    <td><span class="status completed">Operational</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td>Print Management API</td>
-                    <td>Production</td>
-                    <td>v1.8.0</td>
-                    <td>99.97%</td>
-                    <td><span class="status completed">Operational</span></td>
-                </tr>
+</div>
 
-                <tr>
-                    <td>AI Assistant</td>
-                    <td>Staging</td>
-                    <td>v0.9.5</td>
-                    <td>99.91%</td>
-                    <td><span class="status review">Testing</span></td>
-                </tr>
 
-                </tbody>
+<div class="card module">
 
-            </table>
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=85"
+alt="Mobile application"
+>
 
-        </div>
+<div class="module-body">
 
-    </div>
+<h3>Mobile Applications</h3>
+
+<p>
+Android applications and mobile services.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card module">
+
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=85"
+alt="Server"
+>
+
+<div class="module-body">
+
+<h3>Infrastructure</h3>
+
+<p>
+Servers, APIs and technical infrastructure.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:20px">
+
+<div class="card-header">
+<h2>Production Systems</h2>
+<span>System monitoring</span>
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Application</th>
+<th>Environment</th>
+<th>Version</th>
+<th>Uptime</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+<td>Fugie Client Portal</td>
+<td>Production</td>
+<td>v2.4.1</td>
+<td>99.99%</td>
+<td><span class="status completed">Operational</span></td>
+</tr>
+
+<tr>
+<td>Print Management System</td>
+<td>Production</td>
+<td>v1.8.0</td>
+<td>99.97%</td>
+<td><span class="status completed">Operational</span></td>
+</tr>
+
+<tr>
+<td>AI Assistant</td>
+<td>Staging</td>
+<td>v0.9.5</td>
+<td>99.91%</td>
+<td><span class="status review">Testing</span></td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     TEAM
+TEAM
 ========================================================= -->
 
 <section class="page" id="team">
 
-    <div class="page-header">
-        <div>
-            <h1>Team</h1>
-            <p>Manage your employees, developers, designers and production staff.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="openModal('Add Team Member')">
-            + Add Member
-        </button>
-    </div>
+<div>
+
+<h1>Team</h1>
+
+<p>
+Manage staff and responsibilities.
+</p>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="openCreateModal('team')"
+>
++ Add Team Member
+</button>
+
+</div>
 
 
-    <div class="grid module-grid">
+<div class="grid modules">
 
-        <div class="card">
-            <strong>Nabimanya Elijah</strong>
-            <p style="color:var(--muted);font-size:11px;margin-top:5px">
-                Head of Product
-            </p>
-            <span class="status completed" style="margin-top:12px">Online</span>
-        </div>
+<div class="card module">
 
-        <div class="card">
-            <strong>Development Team</strong>
-            <p style="color:var(--muted);font-size:11px;margin-top:5px">
-                Software Engineering
-            </p>
-            <span class="status completed" style="margin-top:12px">8 Members</span>
-        </div>
+<img
+class="module-image"
+src="./elijah.jpeg"
+alt="Head of Product"
+>
 
-        <div class="card">
-            <strong>Creative Team</strong>
-            <p style="color:var(--muted);font-size:11px;margin-top:5px">
-                Design & Branding
-            </p>
-            <span class="status progress" style="margin-top:12px">6 Members</span>
-        </div>
+<div class="module-body">
 
-    </div>
+<h3>Nabimanya Elijah</h3>
+
+<p>Head of Product</p>
+
+<span class="status completed" style="margin-top:9px">
+Online
+</span>
+
+</div>
+
+</div>
+
+
+<div class="card module">
+
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=85"
+alt="Development team"
+>
+
+<div class="module-body">
+
+<h3>Development Team</h3>
+
+<p>Software Engineering & AI</p>
+
+</div>
+
+</div>
+
+
+<div class="card module">
+
+<img
+class="module-image"
+src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85"
+alt="Creative team"
+>
+
+<div class="module-body">
+
+<h3>Creative Team</h3>
+
+<p>Design, Branding & Marketing</p>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     NOTIFICATIONS
+NOTIFICATIONS
 ========================================================= -->
 
 <section class="page" id="notifications">
 
-    <div class="page-header">
-        <div>
-            <h1>Notifications</h1>
-            <p>System alerts, orders and business activity.</p>
-        </div>
-    </div>
+<div class="page-header">
+
+<div>
+
+<h1>Notifications</h1>
+
+<p>
+Business and system activity.
+</p>
+
+</div>
+
+<button
+class="secondary-btn"
+onclick="clearNotifications()"
+>
+Clear
+</button>
+
+</div>
 
 
-    <div class="card">
+<div class="card">
 
-        <div class="activity">
-            <div class="activity-dot"></div>
-            <div>
-                <strong>New printing order</strong>
-                <p>ABC Enterprises placed a 500-flyer order.</p>
-            </div>
-        </div>
+<div class="activity">
 
-        <div class="activity">
-            <div class="activity-dot"></div>
-            <div>
-                <strong>Payment received</strong>
-                <p>UGX 450,000 received for INV-2048.</p>
-            </div>
-        </div>
+<div class="activity-dot"></div>
 
-        <div class="activity">
-            <div class="activity-dot"></div>
-            <div>
-                <strong>Deployment completed</strong>
-                <p>Client Portal v2.4 successfully deployed.</p>
-            </div>
-        </div>
+<div>
+<strong>Enterprise Hub ready</strong>
+<p>Local data storage is active.</p>
+</div>
 
-        <div class="activity">
-            <div class="activity-dot"></div>
-            <div>
-                <strong>AI system alert</strong>
-                <p>AI Assistant staging environment requires review.</p>
-            </div>
-        </div>
+</div>
 
-    </div>
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+<strong>Production monitoring</strong>
+<p>Printing and deployment modules are available.</p>
+</div>
+
+</div>
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+<strong>Finance module</strong>
+<p>Invoices and payments can now be recorded.</p>
+</div>
+
+</div>
+
+<div class="activity">
+
+<div class="activity-dot"></div>
+
+<div>
+<strong>Backup reminder</strong>
+<p>Export your records regularly because this system uses browser storage.</p>
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- =========================================================
-     SETTINGS
+SETTINGS
 ========================================================= -->
 
 <section class="page" id="settings">
 
-    <div class="page-header">
-        <div>
-            <h1>Settings</h1>
-            <p>Configure Fugie Prints Enterprise Hub.</p>
-        </div>
+<div class="page-header">
 
-        <button class="primary-btn" onclick="saveSettings()">
-            Save Changes
-        </button>
-    </div>
+<div>
+
+<h1>Settings</h1>
+
+<p>
+Configure your local Fugie Prints Enterprise Hub.
+</p>
+
+</div>
+
+<button
+class="primary-btn"
+onclick="saveSettings()"
+>
+Save Changes
+</button>
+
+</div>
 
 
-    <div class="card">
+<div class="card">
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <div class="field">
-                <label>Company Name</label>
-                <input value="Fugie Prints">
-            </div>
+<div class="field">
 
-            <div class="field">
-                <label>Business Location</label>
-                <input value="Uganda">
-            </div>
+<label>Company Name</label>
 
-            <div class="field">
-                <label>Business Email</label>
-                <input value="elajahn@gmail.com">
-            </div>
+<input id="companyName" value="Fugie Prints">
 
-            <div class="field">
-                <label>Phone Number</label>
-                <input placeholder="+256 ...">
-            </div>
+</div>
 
-            <div class="field">
-                <label>Currency</label>
-                <select>
-                    <option>UGX — Uganda Shilling</option>
-                    <option>USD — US Dollar</option>
-                </select>
-            </div>
 
-            <div class="field">
-                <label>Timezone</label>
-                <select>
-                    <option>East Africa Time (UTC+3)</option>
-                </select>
-            </div>
+<div class="field">
 
-            <div class="field full">
-                <label>Business Description</label>
-                <textarea>Printing, branding, software development, website development, AI solutions and digital services.</textarea>
-            </div>
+<label>Location</label>
 
-        </div>
+<input id="companyLocation" value="Uganda">
 
-    </div>
+</div>
+
+
+<div class="field">
+
+<label>Email</label>
+
+<input id="companyEmail" value="elajahn@gmail.com">
+
+</div>
+
+
+<div class="field">
+
+<label>Phone</label>
+
+<input id="companyPhone" placeholder="+256 ...">
+
+</div>
+
+
+<div class="field">
+
+<label>Currency</label>
+
+<select id="currency">
+
+<option>UGX — Uganda Shilling</option>
+<option>USD — US Dollar</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Timezone</label>
+
+<select>
+
+<option>East Africa Time (UTC+3)</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>Business Description</label>
+
+<textarea id="companyDescription">Printing, branding, software development, website development, AI solutions and digital services.</textarea>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+<div class="card-header">
+
+<h2>Data Management</h2>
+
+<span>Local browser storage</span>
+
+</div>
+
+<div style="display:flex;gap:9px;flex-wrap:wrap">
+
+<button
+class="secondary-btn"
+onclick="exportData()"
+>
+Export Data
+</button>
+
+<button
+class="secondary-btn"
+onclick="importData()"
+>
+Import Data
+</button>
+
+<button
+class="secondary-btn"
+onclick="window.print()"
+>
+Print Dashboard
+</button>
+
+<button
+class="secondary-btn"
+style="color:#fb7185"
+onclick="resetData()"
+>
+Reset Demo Data
+</button>
+
+</div>
+
+</div>
 
 </section>
+
 
 </main>
 </div>
 
 
 <!-- =========================================================
-     MODAL
+CREATE MODAL
 ========================================================= -->
 
 <div class="modal" id="modal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <h2 id="modalTitle">Create New</h2>
+<h2 id="modalTitle">
+Create New
+</h2>
 
-            <button class="close" onclick="closeModal()">×</button>
+<button class="close" onclick="closeModal()">
+×
+</button>
 
-        </div>
+</div>
 
-        <div class="form-grid">
 
-            <div class="field">
-                <label>Name</label>
-                <input id="modalName" placeholder="Enter name">
-            </div>
+<form id="dynamicForm">
 
-            <div class="field">
-                <label>Category</label>
-                <select>
-                    <option>Printing</option>
-                    <option>Software</option>
-                    <option>Website</option>
-                    <option>AI</option>
-                    <option>Marketing</option>
-                    <option>Client</option>
-                </select>
-            </div>
+<div id="modalFields"></div>
 
-            <div class="field full">
-                <label>Description</label>
-                <textarea placeholder="Enter details..."></textarea>
-            </div>
+<div class="form-actions">
 
-        </div>
+<button
+type="button"
+class="secondary-btn"
+onclick="closeModal()"
+>
+Cancel
+</button>
 
-        <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:20px">
+<button
+type="submit"
+class="primary-btn"
+>
+Save
+</button>
 
-            <button class="icon-btn" onclick="closeModal()">
-                Cancel
-            </button>
+</div>
 
-            <button class="primary-btn" onclick="createItem()">
-                Create
-            </button>
+</form>
 
-        </div>
-
-    </div>
+</div>
 
 </div>
 
@@ -1896,177 +2713,1984 @@ tr:last-child td{
 <script>
 
 /* =========================================================
-   PAGE NAVIGATION
+DATA STORAGE
 ========================================================= */
 
-const navLinks = document.querySelectorAll(".nav-link");
-const pages = document.querySelectorAll(".page");
+const STORAGE_KEY="fugie_prints_enterprise_v1";
 
-function showPage(pageId){
+
+const defaultData={
+
+clients:[
+    {
+        id:"CL-001",
+        name:"ABC Enterprises",
+        phone:"+256 700 000 001",
+        email:"info@abcenterprises.com",
+        company:"ABC Enterprises"
+    },
+    {
+        id:"CL-002",
+        name:"Grace Church",
+        phone:"+256 700 000 002",
+        email:"gracechurch@example.com",
+        company:"Grace Church"
+    }
+],
+
+orders:[
+    {
+        id:"FP-1028",
+        client:"ABC Enterprises",
+        service:"Flyers",
+        quantity:500,
+        amount:450000,
+        status:"Ready"
+    },
+    {
+        id:"FP-1029",
+        client:"Grace Church",
+        service:"Booklets",
+        quantity:250,
+        amount:780000,
+        status:"Printing"
+    }
+],
+
+invoices:[
+    {
+        id:"INV-2048",
+        client:"ABC Enterprises",
+        amount:450000,
+        paid:450000
+    },
+    {
+        id:"INV-2047",
+        client:"Grace Church",
+        amount:780000,
+        paid:0
+    }
+],
+
+projects:[
+    {
+        id:"ENG-402",
+        name:"Fugie Client Portal",
+        category:"Software",
+        lead:"Elijah",
+        progress:92,
+        status:"In Progress"
+    },
+    {
+        id:"ENG-408",
+        name:"AI Customer Assistant",
+        category:"Artificial Intelligence",
+        lead:"AI Team",
+        progress:74,
+        status:"Testing"
+    },
+    {
+        id:"ENG-415",
+        name:"Print Management System",
+        category:"Software",
+        lead:"Development Team",
+        progress:61,
+        status:"Development"
+    }
+],
+
+deployments:[],
+
+team:[],
+
+campaigns:[]
+
+};
+
+
+let data=loadData();
+
+
+function loadData(){
+
+    try{
+
+        const saved=localStorage.getItem(STORAGE_KEY);
+
+        if(saved){
+
+            return {
+                ...defaultData,
+                ...JSON.parse(saved)
+            };
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+    return structuredClone(defaultData);
+
+}
+
+
+function saveData(){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+    );
+
+    renderAll();
+
+}
+
+
+/* =========================================================
+NAVIGATION
+========================================================= */
+
+const pages=document.querySelectorAll(".page");
+
+const navLinks=document.querySelectorAll(".nav-link");
+
+
+const pageNames={
+
+    overview:"Overview",
+    engineering:"Engineering & AI",
+    marketing:"Marketing & Design",
+    printing:"Printing & Production",
+    clients:"Clients",
+    finance:"Invoices & Finance",
+    deployments:"Deployments",
+    team:"Team",
+    notifications:"Notifications",
+    settings:"Settings"
+
+};
+
+
+function showPage(id){
 
     pages.forEach(page=>{
         page.classList.remove("active");
     });
 
-    const target=document.getElementById(pageId);
 
-    if(target){
-        target.classList.add("active");
+    const page=document.getElementById(id);
+
+    if(page){
+
+        page.classList.add("active");
+
     }
+
 
     navLinks.forEach(link=>{
-        link.classList.remove("active");
 
-        if(link.dataset.page===pageId){
-            link.classList.add("active");
-        }
+        link.classList.toggle(
+            "active",
+            link.dataset.page===id
+        );
+
     });
 
-    const activeLink=document.querySelector(
-        `.nav-link[data-page="${pageId}"]`
-    );
 
-    if(activeLink){
-        const text=activeLink.innerText.trim();
-        document.getElementById("breadcrumb").textContent=text;
-    }
+    document.getElementById("breadcrumb").textContent=
+        pageNames[id] || "Overview";
+
+
+    closeSidebar();
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
 
-    closeSidebar();
 }
 
+
 navLinks.forEach(link=>{
+
     link.addEventListener("click",()=>{
+
         showPage(link.dataset.page);
+
     });
+
 });
 
 
 /* =========================================================
-   SIDEBAR MOBILE
+MOBILE
 ========================================================= */
 
 function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("open");
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
 }
 
+
 function closeSidebar(){
-    document.getElementById("sidebar").classList.remove("open");
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
 }
 
 
 /* =========================================================
-   MODAL
+UTILITY
 ========================================================= */
 
-function openModal(title="Create New"){
+function money(value){
 
-    document.getElementById("modalTitle").textContent=title;
-
-    document.getElementById("modal").classList.add("show");
+    return "UGX "+Number(value||0).toLocaleString();
 
 }
 
-function closeModal(){
 
-    document.getElementById("modal").classList.remove("show");
+function id(prefix){
+
+    return prefix+"-"+Date.now().toString().slice(-7);
 
 }
 
-function createItem(){
 
-    const name=document.getElementById("modalName").value;
+function escapeHTML(value){
 
-    if(!name){
+    return String(value??"")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-        alert("Please enter a name.");
+}
+
+
+function statusClass(status){
+
+    const s=String(status).toLowerCase();
+
+    if(
+        s.includes("complete") ||
+        s.includes("ready") ||
+        s.includes("paid") ||
+        s.includes("active")
+    ) return "completed";
+
+    if(
+        s.includes("review") ||
+        s.includes("pending") ||
+        s.includes("testing")
+    ) return "review";
+
+    if(
+        s.includes("production") ||
+        s.includes("printing") ||
+        s.includes("progress") ||
+        s.includes("development")
+    ) return "progress";
+
+    return "pending";
+
+}
+
+
+/* =========================================================
+DASHBOARD
+========================================================= */
+
+function renderDashboard(){
+
+    const revenue=
+        data.orders.reduce(
+            (sum,o)=>sum+Number(o.amount||0),
+            0
+        );
+
+
+    const outstanding=
+        data.invoices.reduce(
+            (sum,i)=>sum+
+                Math.max(
+                    0,
+                    Number(i.amount||0)-
+                    Number(i.paid||0)
+                ),
+            0
+        );
+
+
+    document.getElementById("dashRevenue").textContent=
+        money(revenue);
+
+
+    document.getElementById("dashOrders").textContent=
+        data.orders.length;
+
+
+    document.getElementById("dashClients").textContent=
+        data.clients.length;
+
+
+    document.getElementById("dashOutstanding").textContent=
+        money(outstanding);
+
+
+    document.getElementById("clientBadge").textContent=
+        data.clients.length;
+
+
+    document.getElementById("orderBadge").textContent=
+        data.orders.length;
+
+}
+
+
+/* =========================================================
+ORDERS
+========================================================= */
+
+function renderOrders(){
+
+    const table=
+        document.getElementById("ordersTable");
+
+
+    document.getElementById("printTotal").textContent=
+        data.orders.length;
+
+
+    const production=
+        data.orders.filter(
+            o=>o.status==="Printing" ||
+               o.status==="Production"
+        ).length;
+
+
+    const completed=
+        data.orders.filter(
+            o=>o.status==="Completed" ||
+               o.status==="Ready"
+        ).length;
+
+
+    const revenue=
+        data.orders.reduce(
+            (sum,o)=>sum+Number(o.amount||0),
+            0
+        );
+
+
+    document.getElementById("printProduction").textContent=
+        production;
+
+
+    document.getElementById("printCompleted").textContent=
+        completed;
+
+
+    document.getElementById("printRevenue").textContent=
+        money(revenue);
+
+
+    document.getElementById("productionCount").textContent=
+        data.orders.length+" orders";
+
+
+    if(!data.orders.length){
+
+        table.innerHTML=`
+        <tr>
+            <td colspan="7">
+                <div class="empty">
+                    <div class="empty-icon">🖨️</div>
+                    <p>No printing orders yet.</p>
+                </div>
+            </td>
+        </tr>`;
 
         return;
 
     }
 
-    alert(
-        `"${name}" has been created successfully.`
+
+    table.innerHTML=data.orders.map(order=>`
+
+    <tr>
+
+        <td>
+            <strong>#${escapeHTML(order.id)}</strong>
+        </td>
+
+        <td>
+            ${escapeHTML(order.client)}
+        </td>
+
+        <td>
+            ${escapeHTML(order.service)}
+        </td>
+
+        <td>
+            ${Number(order.quantity).toLocaleString()}
+        </td>
+
+        <td>
+            ${money(order.amount)}
+        </td>
+
+        <td>
+            <span class="status ${statusClass(order.status)}">
+                ${escapeHTML(order.status)}
+            </span>
+        </td>
+
+        <td>
+
+            <button
+                class="secondary-btn"
+                onclick="changeOrderStatus('${order.id}')"
+            >
+                Status
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="deleteOrder('${order.id}')"
+            >
+                Delete
+            </button>
+
+        </td>
+
+    </tr>
+
+    `).join("");
+
+}
+
+
+function changeOrderStatus(orderId){
+
+    const order=data.orders.find(
+        o=>o.id===orderId
     );
 
-    closeModal();
+    if(!order)return;
+
+
+    const statuses=[
+        "Pending",
+        "Printing",
+        "Production",
+        "Ready",
+        "Completed"
+    ];
+
+
+    const current=statuses.indexOf(order.status);
+
+    order.status=
+        statuses[
+            (current+1)%statuses.length
+        ];
+
+
+    saveData();
+
+}
+
+
+function deleteOrder(orderId){
+
+    if(!confirm("Delete this printing order?"))
+        return;
+
+
+    data.orders=data.orders.filter(
+        o=>o.id!==orderId
+    );
+
+
+    saveData();
 
 }
 
 
 /* =========================================================
-   SETTINGS
+CLIENTS
+========================================================= */
+
+function renderClients(){
+
+    const table=
+        document.getElementById("clientsTable");
+
+
+    document.getElementById("clientCount").textContent=
+        data.clients.length+" clients";
+
+
+    if(!data.clients.length){
+
+        table.innerHTML=`
+        <tr>
+            <td colspan="5">
+                <div class="empty">
+                    <div class="empty-icon">👥</div>
+                    <p>No clients added.</p>
+                </div>
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+
+    table.innerHTML=data.clients.map(client=>`
+
+    <tr>
+
+        <td>
+            <strong>
+                ${escapeHTML(client.name)}
+            </strong>
+        </td>
+
+        <td>
+            ${escapeHTML(client.phone)}
+        </td>
+
+        <td>
+            ${escapeHTML(client.email)}
+        </td>
+
+        <td>
+            ${escapeHTML(client.company)}
+        </td>
+
+        <td>
+
+            <button
+                class="secondary-btn"
+                onclick="deleteClient('${client.id}')"
+            >
+                Delete
+            </button>
+
+        </td>
+
+    </tr>
+
+    `).join("");
+
+}
+
+
+function deleteClient(clientId){
+
+    if(!confirm("Delete this client?"))
+        return;
+
+
+    data.clients=data.clients.filter(
+        c=>c.id!==clientId
+    );
+
+
+    saveData();
+
+}
+
+
+/* =========================================================
+INVOICES
+========================================================= */
+
+function renderInvoices(){
+
+    const table=
+        document.getElementById("invoicesTable");
+
+
+    const total=
+        data.invoices.reduce(
+            (s,i)=>s+Number(i.amount||0),
+            0
+        );
+
+
+    const paid=
+        data.invoices.reduce(
+            (s,i)=>s+Number(i.paid||0),
+            0
+        );
+
+
+    const outstanding=total-paid;
+
+
+    document.getElementById("invoiceValue").textContent=
+        money(total);
+
+
+    document.getElementById("paidValue").textContent=
+        money(paid);
+
+
+    document.getElementById("financeOutstanding").textContent=
+        money(outstanding);
+
+
+    document.getElementById("invoiceCount").textContent=
+        data.invoices.length;
+
+
+    if(!data.invoices.length){
+
+        table.innerHTML=`
+        <tr>
+            <td colspan="7">
+                <div class="empty">
+                    <div class="empty-icon">💰</div>
+                    <p>No invoices created.</p>
+                </div>
+            </td>
+        </tr>`;
+
+        return;
+
+    }
+
+
+    table.innerHTML=data.invoices.map(invoice=>{
+
+        const balance=
+            Math.max(
+                0,
+                Number(invoice.amount)-
+                Number(invoice.paid)
+            );
+
+
+        const status=
+            balance<=0 ? "Paid" : "Pending";
+
+
+        return`
+
+        <tr>
+
+            <td>
+                <strong>
+                    ${escapeHTML(invoice.id)}
+                </strong>
+            </td>
+
+            <td>
+                ${escapeHTML(invoice.client)}
+            </td>
+
+            <td>
+                ${money(invoice.amount)}
+            </td>
+
+            <td>
+                ${money(invoice.paid)}
+            </td>
+
+            <td>
+                ${money(balance)}
+            </td>
+
+            <td>
+                <span class="status ${statusClass(status)}">
+                    ${status}
+                </span>
+            </td>
+
+            <td>
+
+                ${
+                    balance>0
+                    ?
+                    `<button
+                        class="secondary-btn"
+                        onclick="recordPayment('${invoice.id}')"
+                    >
+                        Payment
+                    </button>`
+                    :
+                    ""
+                }
+
+                <button
+                    class="secondary-btn"
+                    onclick="printInvoice('${invoice.id}')"
+                >
+                    Print
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }).join("");
+
+}
+
+
+function recordPayment(invoiceId){
+
+    const invoice=data.invoices.find(
+        i=>i.id===invoiceId
+    );
+
+    if(!invoice)return;
+
+
+    const balance=
+        Number(invoice.amount)-
+        Number(invoice.paid);
+
+
+    const amount=prompt(
+        `Outstanding balance: ${money(balance)}\n\nEnter payment amount:`
+    );
+
+
+    if(amount===null)return;
+
+
+    const payment=Number(amount);
+
+
+    if(
+        !Number.isFinite(payment) ||
+        payment<=0
+    ){
+
+        alert("Enter a valid payment.");
+
+        return;
+
+    }
+
+
+    invoice.paid=Math.min(
+        Number(invoice.amount),
+        Number(invoice.paid)+payment
+    );
+
+
+    saveData();
+
+}
+
+
+function printInvoice(invoiceId){
+
+    const invoice=data.invoices.find(
+        i=>i.id===invoiceId
+    );
+
+    if(!invoice)return;
+
+
+    const balance=
+        Number(invoice.amount)-
+        Number(invoice.paid);
+
+
+    const win=window.open("","_blank");
+
+
+    win.document.write(`
+
+    <!DOCTYPE html>
+
+    <html>
+
+    <head>
+
+        <title>${invoice.id}</title>
+
+        <style>
+
+        body{
+            font-family:Arial;
+            padding:40px;
+            color:#111;
+        }
+
+        h1{
+            margin-bottom:5px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:30px;
+        }
+
+        td,th{
+            border:1px solid #ddd;
+            padding:12px;
+            text-align:left;
+        }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <h1>Fugie Prints</h1>
+
+        <p>Enterprise Invoice</p>
+
+        <hr>
+
+        <h2>${escapeHTML(invoice.id)}</h2>
+
+        <p>
+        Client: ${escapeHTML(invoice.client)}
+        </p>
+
+        <table>
+
+        <tr>
+            <th>Invoice Amount</th>
+            <td>${money(invoice.amount)}</td>
+        </tr>
+
+        <tr>
+            <th>Paid</th>
+            <td>${money(invoice.paid)}</td>
+        </tr>
+
+        <tr>
+            <th>Balance</th>
+            <td>${money(balance)}</td>
+        </tr>
+
+        </table>
+
+        <p style="margin-top:40px">
+        Thank you for doing business with Fugie Prints.
+        </p>
+
+        </body>
+
+    </html>
+
+    `);
+
+
+    win.document.close();
+
+    win.print();
+
+}
+
+
+/* =========================================================
+PROJECTS
+========================================================= */
+
+function renderProjects(){
+
+    const table=
+        document.getElementById("projectsTable");
+
+
+    document.getElementById("projectCount").textContent=
+        data.projects.length+" projects";
+
+
+    table.innerHTML=data.projects.map(project=>`
+
+    <tr>
+
+        <td>
+            <strong>
+                ${escapeHTML(project.name)}
+            </strong>
+        </td>
+
+        <td>
+            ${escapeHTML(project.category)}
+        </td>
+
+        <td>
+            ${escapeHTML(project.lead)}
+        </td>
+
+        <td style="min-width:130px">
+
+            ${project.progress}%
+
+            <div class="progress">
+                <div style="width:${project.progress}%"></div>
+            </div>
+
+        </td>
+
+        <td>
+            <span class="status ${statusClass(project.status)}">
+                ${escapeHTML(project.status)}
+            </span>
+        </td>
+
+        <td>
+
+            <button
+                class="secondary-btn"
+                onclick="deleteProject('${project.id}')"
+            >
+                Delete
+            </button>
+
+        </td>
+
+    </tr>
+
+    `).join("");
+
+}
+
+
+function deleteProject(projectId){
+
+    if(!confirm("Delete this project?"))
+        return;
+
+
+    data.projects=data.projects.filter(
+        p=>p.id!==projectId
+    );
+
+
+    saveData();
+
+}
+
+
+/* =========================================================
+CREATE MODAL
+========================================================= */
+
+let currentFormType="";
+
+
+function openCreateModal(type="general"){
+
+    currentFormType=type;
+
+
+    const titles={
+
+        client:"Add New Client",
+        order:"New Printing Order",
+        invoice:"Create Invoice",
+        project:"New Engineering Project",
+        campaign:"New Marketing Campaign",
+        deployment:"New Deployment",
+        team:"Add Team Member",
+        general:"Create New"
+
+    };
+
+
+    document.getElementById("modalTitle").textContent=
+        titles[type] || "Create New";
+
+
+    const fields=
+        document.getElementById("modalFields");
+
+
+    if(type==="client"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Client Name</label>
+            <input name="name" required>
+        </div>
+
+        <div class="field">
+            <label>Phone</label>
+            <input name="phone" placeholder="+256..." required>
+        </div>
+
+        <div class="field">
+            <label>Email</label>
+            <input name="email" type="email">
+        </div>
+
+        <div class="field">
+            <label>Company</label>
+            <input name="company">
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="order"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Client</label>
+
+            <select name="client" required>
+
+                <option value="">
+                    Select client
+                </option>
+
+                ${data.clients.map(c=>`
+                    <option value="${escapeHTML(c.company||c.name)}">
+                        ${escapeHTML(c.company||c.name)}
+                    </option>
+                `).join("")}
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+            <label>Service</label>
+
+            <select name="service">
+
+                <option>Flyers</option>
+                <option>Business Cards</option>
+                <option>Booklets</option>
+                <option>Books</option>
+                <option>Posters</option>
+                <option>Binding</option>
+                <option>Branding</option>
+                <option>Other</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+            <label>Quantity</label>
+            <input name="quantity" type="number" min="1" required>
+        </div>
+
+
+        <div class="field">
+            <label>Total Amount (UGX)</label>
+            <input name="amount" type="number" min="0" required>
+        </div>
+
+
+        <div class="field full">
+            <label>Status</label>
+
+            <select name="status">
+
+                <option>Pending</option>
+                <option>Printing</option>
+                <option>Production</option>
+                <option>Ready</option>
+                <option>Completed</option>
+
+            </select>
+
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="invoice"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Client</label>
+
+            <select name="client" required>
+
+                <option value="">
+                    Select client
+                </option>
+
+                ${data.clients.map(c=>`
+                    <option value="${escapeHTML(c.company||c.name)}">
+                        ${escapeHTML(c.company||c.name)}
+                    </option>
+                `).join("")}
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+            <label>Invoice Amount (UGX)</label>
+            <input name="amount" type="number" min="0" required>
+        </div>
+
+
+        <div class="field full">
+            <label>Initial Payment (UGX)</label>
+            <input name="paid" type="number" min="0" value="0">
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="project"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Project Name</label>
+            <input name="name" required>
+        </div>
+
+        <div class="field">
+            <label>Category</label>
+
+            <select name="category">
+
+                <option>Software</option>
+                <option>Artificial Intelligence</option>
+                <option>Website</option>
+                <option>Mobile App</option>
+                <option>API</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+            <label>Project Lead</label>
+            <input name="lead" value="Nabimanya Elijah">
+        </div>
+
+        <div class="field">
+            <label>Progress %</label>
+            <input name="progress" type="number" min="0" max="100" value="0">
+        </div>
+
+        <div class="field full">
+            <label>Status</label>
+
+            <select name="status">
+
+                <option>Planning</option>
+                <option>Development</option>
+                <option>Testing</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+
+            </select>
+
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="campaign"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Campaign Name</label>
+            <input name="name" required>
+        </div>
+
+        <div class="field">
+            <label>Channel</label>
+            <input name="channel" placeholder="Social Media">
+        </div>
+
+        <div class="field">
+            <label>Budget (UGX)</label>
+            <input name="budget" type="number">
+        </div>
+
+        <div class="field">
+            <label>ROI</label>
+            <input name="roi" placeholder="2.5x">
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="deployment"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Application</label>
+            <input name="name" required>
+        </div>
+
+        <div class="field">
+            <label>Environment</label>
+
+            <select name="environment">
+
+                <option>Production</option>
+                <option>Staging</option>
+                <option>Development</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+            <label>Version</label>
+            <input name="version" placeholder="v1.0.0">
+        </div>
+
+        <div class="field">
+            <label>Status</label>
+
+            <select name="status">
+
+                <option>Operational</option>
+                <option>Testing</option>
+                <option>Maintenance</option>
+
+            </select>
+
+        </div>
+
+        </div>`;
+
+    }
+
+
+    else if(type==="team"){
+
+        fields.innerHTML=`
+
+        <div class="form-grid">
+
+        <div class="field">
+            <label>Name</label>
+            <input name="name" required>
+        </div>
+
+        <div class="field">
+            <label>Role</label>
+            <input name="role" required>
+        </div>
+
+        <div class="field">
+            <label>Department</label>
+            <input name="department">
+        </div>
+
+        <div class="field">
+            <label>Status</label>
+
+            <select name="status">
+
+                <option>Online</option>
+                <option>Offline</option>
+                <option>On Leave</option>
+
+            </select>
+
+        </div>
+
+        </div>`;
+
+    }
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+document
+.getElementById("dynamicForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    const formData=
+        new FormData(event.target);
+
+
+    const obj=
+        Object.fromEntries(formData.entries());
+
+
+    switch(currentFormType){
+
+        case "client":
+
+            data.clients.push({
+
+                id:id("CL"),
+
+                name:obj.name,
+
+                phone:obj.phone,
+
+                email:obj.email,
+
+                company:obj.company || obj.name
+
+            });
+
+            break;
+
+
+        case "order":
+
+            data.orders.push({
+
+                id:id("FP"),
+
+                client:obj.client,
+
+                service:obj.service,
+
+                quantity:Number(obj.quantity),
+
+                amount:Number(obj.amount),
+
+                status:obj.status
+
+            });
+
+            break;
+
+
+        case "invoice":
+
+            data.invoices.push({
+
+                id:id("INV"),
+
+                client:obj.client,
+
+                amount:Number(obj.amount),
+
+                paid:Math.min(
+                    Number(obj.amount),
+                    Number(obj.paid||0)
+                )
+
+            });
+
+            break;
+
+
+        case "project":
+
+            data.projects.push({
+
+                id:id("ENG"),
+
+                name:obj.name,
+
+                category:obj.category,
+
+                lead:obj.lead,
+
+                progress:Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        Number(obj.progress||0)
+                    )
+                ),
+
+                status:obj.status
+
+            });
+
+            break;
+
+
+        case "campaign":
+
+            data.campaigns.push({
+
+                id:id("CAM"),
+
+                name:obj.name,
+
+                channel:obj.channel,
+
+                budget:Number(obj.budget||0),
+
+                roi:obj.roi
+
+            });
+
+            break;
+
+
+        case "deployment":
+
+            data.deployments.push({
+
+                id:id("DEP"),
+
+                name:obj.name,
+
+                environment:obj.environment,
+
+                version:obj.version,
+
+                status:obj.status
+
+            });
+
+            break;
+
+
+        case "team":
+
+            data.team.push({
+
+                id:id("TEAM"),
+
+                name:obj.name,
+
+                role:obj.role,
+
+                department:obj.department,
+
+                status:obj.status
+
+            });
+
+            break;
+
+    }
+
+
+    closeModal();
+
+    event.target.reset();
+
+    saveData();
+
+
+    alert("Record created successfully.");
+
+});
+
+
+/* =========================================================
+SEARCH
+========================================================= */
+
+const searchInput=
+    document.getElementById("globalSearch");
+
+const searchResults=
+    document.getElementById("searchResults");
+
+
+searchInput.addEventListener("input",function(){
+
+    const query=
+        this.value.toLowerCase().trim();
+
+
+    if(!query){
+
+        searchResults.classList.remove("show");
+
+        return;
+
+    }
+
+
+    const results=[];
+
+
+    data.clients.forEach(client=>{
+
+        if(
+            client.name.toLowerCase().includes(query) ||
+            client.company.toLowerCase().includes(query) ||
+            client.phone.toLowerCase().includes(query)
+        ){
+
+            results.push({
+
+                title:client.name,
+
+                sub:"Client",
+
+                page:"clients"
+
+            });
+
+        }
+
+    });
+
+
+    data.orders.forEach(order=>{
+
+        if(
+            order.id.toLowerCase().includes(query) ||
+            order.client.toLowerCase().includes(query) ||
+            order.service.toLowerCase().includes(query)
+        ){
+
+            results.push({
+
+                title:order.id,
+
+                sub:`Printing order — ${order.service}`,
+
+                page:"printing"
+
+            });
+
+        }
+
+    });
+
+
+    data.projects.forEach(project=>{
+
+        if(
+            project.name.toLowerCase().includes(query) ||
+            project.category.toLowerCase().includes(query)
+        ){
+
+            results.push({
+
+                title:project.name,
+
+                sub:"Engineering project",
+
+                page:"engineering"
+
+            });
+
+        }
+
+    });
+
+
+    if(!results.length){
+
+        searchResults.innerHTML=`
+
+        <div class="search-result">
+
+            <strong>No results found</strong>
+
+            <small>
+                Try another search term.
+            </small>
+
+        </div>`;
+
+    }
+
+    else{
+
+        searchResults.innerHTML=
+            results.slice(0,8).map(result=>`
+
+            <div
+                class="search-result"
+                onclick="searchNavigate('${result.page}')"
+            >
+
+                <strong>
+                    ${escapeHTML(result.title)}
+                </strong>
+
+                <small>
+                    ${escapeHTML(result.sub)}
+                </small>
+
+            </div>
+
+            `).join("");
+
+    }
+
+
+    searchResults.classList.add("show");
+
+});
+
+
+function searchNavigate(page){
+
+    showPage(page);
+
+    searchInput.value="";
+
+    searchResults.classList.remove("show");
+
+}
+
+
+document.addEventListener("click",function(e){
+
+    if(
+        !e.target.closest(".search")
+    ){
+
+        searchResults.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================================================
+SETTINGS
 ========================================================= */
 
 function saveSettings(){
 
-    alert("Fugie Prints settings saved successfully.");
+    const settings={
+
+        companyName:
+            document.getElementById("companyName").value,
+
+        companyLocation:
+            document.getElementById("companyLocation").value,
+
+        companyEmail:
+            document.getElementById("companyEmail").value,
+
+        companyPhone:
+            document.getElementById("companyPhone").value,
+
+        currency:
+            document.getElementById("currency").value,
+
+        description:
+            document.getElementById("companyDescription").value
+
+    };
+
+
+    localStorage.setItem(
+        "fugie_prints_settings",
+        JSON.stringify(settings)
+    );
+
+
+    alert("Settings saved successfully.");
+
+}
+
+
+function loadSettings(){
+
+    try{
+
+        const settings=
+            JSON.parse(
+                localStorage.getItem(
+                    "fugie_prints_settings"
+                )
+            );
+
+
+        if(!settings)return;
+
+
+        if(settings.companyName)
+            document.getElementById("companyName").value=
+                settings.companyName;
+
+
+        if(settings.companyLocation)
+            document.getElementById("companyLocation").value=
+                settings.companyLocation;
+
+
+        if(settings.companyEmail)
+            document.getElementById("companyEmail").value=
+                settings.companyEmail;
+
+
+        if(settings.companyPhone)
+            document.getElementById("companyPhone").value=
+                settings.companyPhone;
+
+
+        if(settings.description)
+            document.getElementById("companyDescription").value=
+                settings.description;
+
+    }catch(e){
+
+        console.error(e);
+
+    }
 
 }
 
 
 /* =========================================================
-   GLOBAL SEARCH
+EXPORT / IMPORT
 ========================================================= */
 
-const search=document.getElementById("globalSearch");
+function exportData(){
 
-search.addEventListener("keydown",function(e){
+    const backup={
 
-    if(e.key==="Enter"){
+        enterpriseData:data,
 
-        const query=this.value.toLowerCase().trim();
+        settings:localStorage.getItem(
+            "fugie_prints_settings"
+        ),
 
-        if(!query) return;
+        exportedAt:new Date().toISOString()
 
-        const searchablePages={
-            engineering:"engineering",
-            ai:"engineering",
-            software:"engineering",
-            marketing:"marketing",
-            design:"marketing",
-            printing:"printing",
-            production:"printing",
-            clients:"clients",
-            customers:"clients",
-            finance:"finance",
-            invoices:"finance",
-            payments:"finance",
-            deployment:"deployments",
-            website:"deployments",
-            app:"deployments",
-            team:"team",
-            staff:"team",
-            settings:"settings",
-            notification:"notifications"
-        };
+    };
 
-        let found=null;
 
-        for(const keyword in searchablePages){
+    const blob=new Blob(
+        [JSON.stringify(backup,null,2)],
+        {
+            type:"application/json"
+        }
+    );
 
-            if(query.includes(keyword)){
-                found=searchablePages[keyword];
-                break;
+
+    const url=
+        URL.createObjectURL(blob);
+
+
+    const link=
+        document.createElement("a");
+
+
+    link.href=url;
+
+    link.download=
+        "fugie-prints-backup.json";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+function importData(){
+
+    const input=
+        document.createElement("input");
+
+
+    input.type="file";
+
+    input.accept=".json";
+
+
+    input.onchange=function(){
+
+        const file=this.files[0];
+
+        if(!file)return;
+
+
+        const reader=
+            new FileReader();
+
+
+        reader.onload=function(){
+
+            try{
+
+                const backup=
+                    JSON.parse(reader.result);
+
+
+                if(
+                    !backup.enterpriseData
+                ){
+
+                    throw new Error(
+                        "Invalid backup file"
+                    );
+
+                }
+
+
+                data={
+                    ...defaultData,
+                    ...backup.enterpriseData
+                };
+
+
+                saveData();
+
+
+                if(backup.settings){
+
+                    localStorage.setItem(
+                        "fugie_prints_settings",
+                        backup.settings
+                    );
+
+                    loadSettings();
+
+                }
+
+
+                alert(
+                    "Data imported successfully."
+                );
+
+            }catch(error){
+
+                alert(
+                    "Could not import this file."
+                );
+
             }
 
-        }
+        };
 
-        if(found){
 
-            showPage(found);
+        reader.readAsText(file);
 
-        }else{
+    };
 
-            alert(
-                `No workspace section found for "${query}".`
-            );
 
-        }
+    input.click();
+
+}
+
+
+function resetData(){
+
+    const confirmReset=
+        confirm(
+            "This will delete all locally saved Fugie Prints records and restore demo data. Continue?"
+        );
+
+
+    if(!confirmReset)return;
+
+
+    data=structuredClone(defaultData);
+
+    saveData();
+
+    alert("Demo data restored.");
+
+}
+
+
+/* =========================================================
+NOTIFICATIONS
+========================================================= */
+
+function clearNotifications(){
+
+    alert(
+        "Notifications cleared for this session."
+    );
+
+}
+
+
+/* =========================================================
+RENDER
+========================================================= */
+
+function renderAll(){
+
+    renderDashboard();
+
+    renderOrders();
+
+    renderClients();
+
+    renderInvoices();
+
+    renderProjects();
+
+}
+
+
+/* =========================================================
+MODAL OUTSIDE CLICK
+========================================================= */
+
+document
+.getElementById("modal")
+.addEventListener("click",function(event){
+
+    if(event.target===this){
+
+        closeModal();
 
     }
 
@@ -2074,19 +4698,30 @@ search.addEventListener("keydown",function(e){
 
 
 /* =========================================================
-   KEYBOARD SHORTCUT
+KEYBOARD SHORTCUTS
 ========================================================= */
 
-document.addEventListener("keydown",function(e){
+document.addEventListener("keydown",function(event){
 
     if(
-        (e.ctrlKey || e.metaKey) &&
-        e.key.toLowerCase()==="k"
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase()==="k"
     ){
 
-        e.preventDefault();
+        event.preventDefault();
 
-        search.focus();
+        searchInput.focus();
+
+    }
+
+
+    if(event.key==="Escape"){
+
+        closeModal();
+
+        searchResults.classList.remove(
+            "show"
+        );
 
     }
 
@@ -2094,19 +4729,12 @@ document.addEventListener("keydown",function(e){
 
 
 /* =========================================================
-   CLOSE MODAL OUTSIDE
+INITIALIZE
 ========================================================= */
 
-document.getElementById("modal").addEventListener(
-    "click",
-    function(e){
+loadSettings();
 
-        if(e.target===this){
-            closeModal();
-        }
-
-    }
-);
+renderAll();
 
 </script>
 
