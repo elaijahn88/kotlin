@@ -298,42 +298,118 @@
             background-color: var(--border);
         }
 
-        /* Executive Banner */
+        /* Executive Hero Banner with High-End Visual Background */
         .executive-card {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(30, 41, 59, 0.8));
+            position: relative;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 1.5rem;
+            padding: 2rem;
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
         }
 
         .executive-profile {
             display: flex;
             align-items: center;
             gap: 1.25rem;
+            z-index: 1;
         }
 
         .executive-avatar {
-            width: 72px;
-            height: 72px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
         }
 
         .executive-details h1 {
-            font-size: 1.35rem;
+            font-size: 1.5rem;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
         }
 
         .executive-details p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        /* Fancy Elaborate Multi-card Showcase */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-card {
+            position: relative;
+            height: 220px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 10%, rgba(9, 13, 22, 0.2) 60%, transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.25rem;
+        }
+
+        .gallery-tag {
+            align-self: flex-start;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .gallery-sub {
+            font-size: 0.78rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            margin-top: 0.15rem;
         }
 
         /* Grid Layouts */
@@ -402,8 +478,9 @@
         }
 
         .section-title {
-            font-size: 1.05rem;
-            font-weight: 600;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         /* List & Table Components */
@@ -480,6 +557,7 @@
 </head>
 <body>
 
+    <!-- Left Navigation Sidebar -->
     <aside class="sidebar">
         <div>
             <div class="brand-logo-group">
@@ -526,20 +604,22 @@
         </div>
 
         <div class="sidebar-footer">
-            <img src="elijah (1).jpeg" alt="Nabimanya Elijah" class="user-avatar-img">
+            <img src="./elijah.jpeg" alt="Nabimanya Elijah" class="user-avatar-img">
             <div class="user-info">
                 <span class="user-name">Nabimanya Elijah</span>
-                <span class="user-role">CEO & Head of Product</span>
+                <span class="user-role">Head of Product</span>
             </div>
         </div>
     </aside>
 
+    <!-- Main Content Workspace -->
     <div class="main-wrapper">
+        <!-- Top Navigation Bar -->
         <header class="topbar">
             <div class="breadcrumb">
                 <span>Fugie Prints</span>
                 <span>/</span>
-                <span class="breadcrumb-active">Executive Dashboard</span>
+                <span class="breadcrumb-active">Product Workspace</span>
             </div>
 
             <div style="display: flex; gap: 1rem; align-items: center;">
@@ -548,22 +628,68 @@
                     <input type="text" class="search-input" placeholder="Search tasks, campaigns, commits...">
                     <span class="shortcut-hint">⌘K</span>
                 </div>
+                <!-- Interactive Action Button -->
                 <button class="btn btn-primary" onclick="alert('Creating a new project for Fugie Prints!')">+ Create New</button>
             </div>
         </header>
 
+        <!-- Main Body -->
         <main class="main-content">
+            <!-- Executive Banner for Head of Product with Futuristic Background -->
             <section class="executive-card">
                 <div class="executive-profile">
-                    <img src="elijah (1).jpeg" alt="Nabimanya Elijah" class="executive-avatar">
+                    <img src="./elijah.jpeg" alt="Nabimanya Elijah" class="executive-avatar">
                     <div class="executive-details">
                         <h1>Welcome back, Nabimanya Elijah</h1>
-                        <p>CEO & Head of Product — Fugie Prints (Uganda & Beyond)</p>
+                        <p>Head of Product — Fugie Prints (Uganda & Beyond)</p>
                     </div>
                 </div>
-                <div style="display: flex; gap: 0.75rem;">
-                    <a href="mailto:contact@fugieprints.com" class="btn btn-secondary">Contact Executive</a>
+                <div style="display: flex; gap: 0.75rem; z-index: 1;">
+                    <!-- Interactive Action Buttons -->
+                    <a href="mailto:contact@fugieprints.com" class="btn btn-secondary" style="background: rgba(15,23,42,0.6); backdrop-filter: blur(4px);">Contact Product Lead</a>
                     <button class="btn btn-primary" onclick="alert('Initiating product launch sequence...')">Launch Product Sprint</button>
+                </div>
+            </section>
+
+            <!-- Creative & Technology High-Impact Gallery Grid -->
+            <div class="section-header">
+                <h2 class="section-title">Product & Technology Innovation Ecosystem</h2>
+            </div>
+            <section class="gallery-grid">
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80" alt="Generative Design & Print Solutions">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Design Studio</span>
+                        <span class="gallery-title">High-Impact Print & Branding</span>
+                        <span class="gallery-sub">Precision color management & dynamic graphics</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1000&q=80" alt="Artificial Intelligence & Neural Networks">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">AI & Machine Learning</span>
+                        <span class="gallery-title">Neural Automation Hub</span>
+                        <span class="gallery-sub">Custom AI assistants & conversational chatbots</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Data Science & Business Intelligence">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Analytics Engine</span>
+                        <span class="gallery-title">Predictive Intelligence</span>
+                        <span class="gallery-sub">Real-time telemetry and user interaction insights</span>
+                    </div>
+                </div>
+
+                <div class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Product Engineering Team">
+                    <div class="gallery-overlay">
+                        <span class="gallery-tag">Leadership</span>
+                        <span class="gallery-title">Cross-Functional Agile</span>
+                        <span class="gallery-sub">Streamlined sprint cycles and GTM execution</span>
+                    </div>
                 </div>
             </section>
 
